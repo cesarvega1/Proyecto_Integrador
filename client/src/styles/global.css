@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Outfit", sans-serif;
+  
+  --color-burgundy-50: #fdf4f5;
+  --color-burgundy-100: #fae6e9;
+  --color-burgundy-200: #f5cfd5;
+  --color-burgundy-600: #800020;
+  --color-burgundy-800: #5b1928;
+  --color-burgundy-950: #2d0a11;
+  
+  --color-rosegold-100: #f4e3e5;
+  --color-rosegold-400: #d4a5ab;
+  --color-rosegold-500: #b76e79;
+  --color-rosegold-700: #8d4852;
+  
+  --color-cream-50: #fffdfa;
+  --color-cream-100: #faf6f0;
+  --color-cream-200: #f2e9dc;
+}
+
+@layer base {
+  body {
+    @apply transition-colors duration-300 bg-cream-50 dark:bg-stone-950 text-slate-800 dark:text-stone-100;
+  }
+  
+  h1, h2, h3, h4, h5, h6, .font-serif-elegant {
+    font-family: var(--font-serif);
+  }
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Efecto de borde hilado para estética de modistería */
+.borde-hilado {
+  background-image: linear-gradient(to right, currentColor 50%, transparent 50%);
+  background-position: top;
+  background-size: 10px 1px;
+  background-repeat: repeat-x;
+}
+
+.borde-hilado-v {
+  background-image: linear-gradient(to bottom, currentColor 50%, transparent 50%);
+  background-position: left;
+  background-size: 1px 10px;
+  background-repeat: repeat-y;
+}

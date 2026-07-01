@@ -1,0 +1,161 @@
+{
+  "users": [
+    {
+      "name": "Cesar",
+      "lastName": "Vega",
+      "email": "cesarvega@gmail.com",
+      "password": "123456",
+      "role": [
+        "ADMIN"
+      ],
+      "id": 2
+    },
+    {
+      "name": "Cesar",
+      "lastName": "Cliente",
+      "email": "cesar10@gmail.com",
+      "password": "123456",
+      "role": [
+        "USER"
+      ],
+      "id": 3
+    }
+  ],
+  "productos": [
+    {
+      "nombre": "Vestido de Noche Silk Imperial",
+      "descripcion": "Vestido largo de gala confeccionado en seda pura natural. Presenta un escote en V pronunciado en la espalda, falda fluida de corte A y detalles de costura invisibles hechos a mano. Perfecto para bodas o eventos formales.",
+      "categoria": "Vestidos",
+      "precio": 280000,
+      "stock": 8,
+      "tallas": [
+        "S",
+        "M",
+        "L"
+      ],
+      "colores": [
+        "Borgoña",
+        "Negro",
+        "Azul Marino"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&auto=format&fit=crop&q=80",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "nombre": "Traje Sastre Lana Italiana",
+      "descripcion": "Conjunto de chaqueta cruzada estructurada con forro de satén jacquard y pantalones de corte recto y talle alto. Confeccionado en lana virgen italiana transpirable. El epítome de la sofisticación ejecutiva.",
+      "categoria": "Trajes",
+      "precio": 350000,
+      "stock": 5,
+      "tallas": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "colores": [
+        "Gris Oxford",
+        "Negro",
+        "Azul Marino"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 3,
+      "nombre": "Blusa Victoriana Encaje Francés",
+      "descripcion": "Blusa romántica de gasa de seda translúcida con cuello alto camisero, pechera plisada y mangas abullonadas con puños adornados en encaje de Chantilly. Ideal para combinar con faldas tubo o pantalones sastres.",
+      "categoria": "Blusas",
+      "precio": 120000,
+      "stock": 12,
+      "tallas": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colores": [
+        "Crema",
+        "Blanco"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1548624149-f9b1859aa7d0?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 4,
+      "nombre": "Falda Plisada Satén Dorado",
+      "descripcion": "Falda midi plisada a presión técnica que retiene la forma tras los lavados. Confeccionada en raso de satén pesado con caída espectacular y una pretina fina elástica oculta. Destaca por su elegante brillo metálico.",
+      "categoria": "Faldas",
+      "precio": 150000,
+      "stock": 10,
+      "tallas": [
+        "S",
+        "M",
+        "L"
+      ],
+      "colores": [
+        "Champán",
+        "Verde Esmeralda",
+        "Rosa Palo"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 5,
+      "nombre": "Abrigo Sastreado Cachemira",
+      "descripcion": "Abrigo clásico de solapa ancha y doble botonadura en carey sintético. Elaborado en mezcla de lana merino y cachemira premium de tacto ultrasuave. Incluye bolsillos de plastrón invisibles y forro térmico.",
+      "categoria": "Sacos",
+      "precio": 450000,
+      "stock": 3,
+      "tallas": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "colores": [
+        "Camel",
+        "Negro",
+        "Borgoña"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 6,
+      "nombre": "Corsé Bordado Flor de Lis",
+      "descripcion": "Corsé de alta costura para exterior. Presenta varillas de soporte flexibles que definen la silueta y bordados artesanales de hilos dorados sobre terciopelo de algodón. Cierre trasero con cordones regulables.",
+      "categoria": "Accesorios",
+      "precio": 180000,
+      "stock": 7,
+      "tallas": [
+        "XS",
+        "S",
+        "M"
+      ],
+      "colores": [
+        "Negro",
+        "Rojo Rubí"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1618244972963-dbee1a7edc95?w=500&auto=format&fit=crop&q=80"
+    }
+  ],
+  "ordenes": [
+    {
+      "id": 1,
+      "userId": 3,
+      "fecha": "2026-06-25",
+      "productos": [
+        {
+          "productoId": 1,
+          "nombre": "Vestido de Noche Silk Imperial",
+          "cantidad": 1,
+          "talla": "M",
+          "color": "Borgoña",
+          "precioUnitario": 280000
+        }
+      ],
+      "total": 280000,
+      "estado": "Entregado",
+      "direccionEnvio": "Calle 10 # 5-20, Bogotá",
+      "telefono": "+57 300 123 4567",
+      "metodoPago": "Tarjeta de Crédito"
+    }
+  ]
+}
