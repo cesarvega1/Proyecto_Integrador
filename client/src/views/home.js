@@ -31,10 +31,7 @@ export function renderHome() {
           </a>
           
           ${usuario ? `
-            <a class="group flex items-center gap-2 text-sm font-medium text-stone-900 dark:text-white transition-colors hover:text-burgundy-700 dark:hover:text-rosegold-400" 
-               href="/dashboard" data-link>
-               Mis Pedidos <span class="transition-transform group-hover:translate-x-1">→</span>
-            </a>
+            
           ` : `
             <a class="group flex items-center gap-2 text-sm font-medium text-stone-900 dark:text-white transition-colors hover:text-burgundy-700 dark:hover:text-rosegold-400" 
                href="/login" data-link>
@@ -47,7 +44,7 @@ export function renderHome() {
       <!-- Mitad Imagen -->
       <div class="flex-1 w-full lg:w-1/2 h-[60vh] lg:h-[85vh] relative">
         <div class="absolute inset-0 bg-stone-900/5 z-10 dark:bg-black/20"></div>
-        <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1200&auto=format&fit=crop&q=80" 
+        <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto:best,fl_lossy/if_w_gt_800,w_800/7361768_CAM_LAM_FTD_SS_26_MAY_29_FOOTBALL_WC_KICK_OFF_ONSITE_TEASER_CAROUSEL_1050x1400_CO_5d65cbafe6.png" 
              alt="Alta Costura" class="w-full h-full object-cover object-center" />
         <!-- Floating badge -->
         

@@ -15,8 +15,8 @@ export function renderNavbar() {
     const isAdmin = usuario.role.includes("ADMIN");
     userNavHtml = `
       ${isAdmin ? `<a class="text-sm font-semibold hover:text-rosegold-500 transition-colors" href="/admin" data-link>Panel Admin</a>` : ""}
-      <a class="text-sm font-semibold hover:text-rosegold-500 transition-colors" href="/dashboard" data-link>Mis Pedidos</a>
-      <a class="text-sm font-semibold hover:text-rosegold-500 transition-colors" href="/profile" data-link>Mi Perfil</a>
+     
+      
       <button id="logout-btn" class="rounded-full bg-burgundy-800 px-4 py-2 text-xs font-bold text-white hover:bg-burgundy-600 transition-all hover:scale-105" style="cursor: pointer;">Salir</button>
     `;
   } else {
