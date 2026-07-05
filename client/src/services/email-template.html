@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirmación de Compra — SportZone</title>
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #f4f4f5; }
+    .wrapper { max-width: 580px; margin: 0 auto; padding: 24px 12px; }
+    .card { background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    .header { background: linear-gradient(135deg, #e05c1a 0%, #c2440e 100%); padding: 36px 32px; text-align: center; }
+    .header-icon { font-size: 48px; }
+    .header h1 { color: #ffffff; margin: 12px 0 4px; font-size: 24px; font-weight: 900; letter-spacing: 0.05em; text-transform: uppercase; }
+    .header p { color: rgba(255,255,255,0.85); margin: 0; font-size: 13px; }
+    .body { padding: 32px; }
+    .greeting { font-size: 16px; color: #27272a; font-weight: 700; margin-bottom: 8px; }
+    .subtext { font-size: 13px; color: #71717a; line-height: 1.6; margin-bottom: 24px; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+    .info-box { background: #f4f4f5; border-radius: 12px; padding: 14px 16px; }
+    .info-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #a1a1aa; margin-bottom: 4px; }
+    .info-value { font-size: 14px; font-weight: 700; color: #18181b; }
+    .info-value.highlight { color: #e05c1a; font-size: 18px; }
+    .section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #e05c1a; margin-bottom: 12px; }
+    .products-table { width: 100%; border-collapse: collapse; }
+    .products-table th { text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #a1a1aa; padding: 8px 0; border-bottom: 1px solid #e4e4e7; }
+    .products-table td { padding: 10px 0; font-size: 12px; color: #3f3f46; border-bottom: 1px solid #f4f4f5; vertical-align: top; }
+    .product-name { font-weight: 700; color: #18181b; }
+    .product-detail { color: #a1a1aa; font-size: 10px; margin-top: 2px; }
+    .total-row { display: flex; justify-content: space-between; align-items: center; background: #fff7ed; border-radius: 12px; padding: 14px 16px; margin-top: 16px; }
+    .total-label { font-size: 13px; font-weight: 700; color: #18181b; }
+    .total-value { font-size: 20px; font-weight: 900; color: #e05c1a; }
+    .divider { height: 1px; background: #e4e4e7; margin: 24px 0; }
+    .shipping-box { background: #f4f4f5; border-radius: 12px; padding: 16px; }
+    .note { font-size: 12px; color: #71717a; line-height: 1.6; margin-top: 24px; padding: 16px; background: #f0fdf4; border-radius: 12px; border-left: 4px solid #22c55e; }
+    .footer { background: #18181b; padding: 24px 32px; text-align: center; }
+    .footer-logo { font-size: 20px; font-weight: 900; color: #e05c1a; letter-spacing: 0.05em; }
+    .footer p { font-size: 11px; color: #71717a; margin: 8px 0 0; }
+    .footer a { color: #e05c1a; text-decoration: none; }
+    @media (max-width: 480px) {
+      .info-grid { grid-template-columns: 1fr; }
+      .body { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+
+      <!-- HEADER -->
+      <div class="header">
+        <div class="header-icon">⚡</div>
+        <h1>¡Compra Exitosa!</h1>
+        <p>Tu pedido ha sido registrado y está en proceso</p>
+      </div>
+
+      <!-- BODY -->
+      <div class="body">
+
+        <p class="greeting">Hola, {{to_name}} 👋</p>
+        <p class="subtext">
+          Gracias por tu compra en <strong>{{store_name}}</strong>. Tu pedido fue confirmado exitosamente. 
+          A continuación encontrarás el resumen completo de tu compra.
+        </p>
+
+        <!-- Info grid -->
+        <div class="info-grid">
+          <div class="info-box">
+            <div class="info-label">Número de Orden</div>
+            <div class="info-value highlight">#{{order_id}}</div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">Fecha</div>
+            <div class="info-value">{{order_date}}</div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">Método de Pago</div>
+            <div class="info-value">{{payment_method}}</div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">Estado</div>
+            <div class="info-value" style="color:#22c55e;">✔ Confirmada</div>
+          </div>
+        </div>
+
+        <!-- Productos -->
+        <div class="section-title">📦 Productos Comprados</div>
+        <table class="products-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th style="text-align:right;">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- EmailJS renderiza esto como texto plano desde {{products_list}} -->
+            <tr>
+              <td style="white-space:pre-line;">{{products_list}}</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Total -->
+        <div class="total-row">
+          <span class="total-label">Total de tu pedido</span>
+          <span class="total-value">{{order_total}}</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Dirección de envío -->
+        <div class="section-title">🚚 Dirección de Envío</div>
+        <div class="shipping-box">
+          <p style="margin:0;font-size:13px;color:#3f3f46;font-weight:600;">{{shipping_address}}</p>
+        </div>
+
+        <!-- Nota de seguimiento -->
+        <div class="note">
+          📬 <strong>¿Qué sigue?</strong> Recibirás una notificación cuando tu pedido sea enviado. 
+          Si tienes preguntas, escríbenos a <a href="mailto:info@sportzone.com.co">info@sportzone.com.co</a> 
+          o llámanos al <strong>+57 310 258 7880</strong>.
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <div class="footer-logo">⚡ SportZone</div>
+        <p>© {{store_name}} · Todos los derechos reservados</p>
+        <p><a href="mailto:info@sportzone.com.co">info@sportzone.com.co</a></p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

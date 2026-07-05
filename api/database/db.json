@@ -19,6 +19,16 @@
         "USER"
       ],
       "id": 3
+    },
+    {
+      "name": "Hector",
+      "lastName": "Vega",
+      "email": "hectorvega@gmail.com",
+      "password": "123456",
+      "role": [
+        "USER"
+      ],
+      "id": 4
     }
   ],
   "productos": [
@@ -27,7 +37,7 @@
       "descripcion": "Camiseta técnica de entrenamiento Nike con tecnología Dri-FIT que aleja la humedad de la piel para mantenerte seco y cómodo. Confeccionada en 100% poliéster reciclado con ajuste estándar. Ideal para fútbol, atletismo y entrenamiento en gimnasio.",
       "categoria": "Camisetas",
       "precio": 95000,
-      "stock": 25,
+      "stock": 22,
       "tallas": [
         "S",
         "M",
@@ -50,7 +60,7 @@
       "descripcion": "Camiseta de compresión Adidas Techfit diseñada para maximizar el rendimiento muscular durante el ejercicio. Tejido elástico de 4 vías que se adapta a cada movimiento. Tecnología AEROREADY para mantenerte seco. Perfecta para running, ciclismo y CrossFit.",
       "categoria": "Camisetas",
       "precio": 110000,
-      "stock": 18,
+      "stock": 12,
       "tallas": [
         "S",
         "M",
@@ -70,7 +80,7 @@
       "descripcion": "Camiseta Under Armour de manga corta con tecnología HeatGear que regula la temperatura corporal en condiciones de calor extremo. Tela ultraligera con UPF 30 para protección solar. Costuras planas anti-rozadura. Ideal para deportes al aire libre y entrenamiento intenso.",
       "categoria": "Camisetas",
       "precio": 125000,
-      "stock": 14,
+      "stock": 9,
       "tallas": [
         "S",
         "M",
@@ -92,7 +102,7 @@
       "descripcion": "Las Nike Air Zoom Pegasus 40 combinan amortiguación Air Zoom reactiva con una placa de fibra de carbono para máxima propulsión. Upper en malla transpirable con soporte estructural en los laterales. Suela de goma de alta tracción para superficies variadas. El calzado preferido de los corredores de larga distancia.",
       "categoria": "Calzado",
       "precio": 420000,
-      "stock": 10,
+      "stock": 9,
       "tallas": [
         "38",
         "39",
@@ -139,7 +149,7 @@
       "descripcion": "Las New Balance Fresh Foam X 1080v13 ofrecen la experiencia de carrera más suave de New Balance gracias a su mediasuela de espuma Fresh Foam X de alta densidad. Upper en malla Hypoknit ultrasuave sin costuras. Contrafuerte del talón integrado para estabilidad. Perfectas para rodajes largos y runners de neutro a supinador.",
       "categoria": "Calzado",
       "precio": 395000,
-      "stock": 12,
+      "stock": 11,
       "tallas": [
         "38",
         "39",
@@ -162,7 +172,7 @@
       "descripcion": "Short deportivo Nike Pro de 5 pulgadas con forro de compresión integrado para soporte muscular. Tejido Dri-FIT estándar con gráficos de ventilación estratégica en zonas de calor. Cintura elástica con cordón ajustable y bolsillo lateral con cierre. Perfecto para running, entrenamiento funcional y deportes de equipo.",
       "categoria": "Pantalonetas",
       "precio": 85000,
-      "stock": 22,
+      "stock": 21,
       "tallas": [
         "S",
         "M",
@@ -346,7 +356,7 @@
       "descripcion": "Chaqueta de entrenamiento Adidas Tiro 23 fabricada en tela de doble capa con tecnología AEROREADY. Cremallera completa frontal con cuello alto, bolsillos laterales con cremallera y puños con goma elástica. Diseño slim fit con tres rayas clásicas Adidas. Perfecta para fútbol, entrenamiento y uso casual deportivo.",
       "categoria": "Chaquetas",
       "precio": 175000,
-      "stock": 13,
+      "stock": 12,
       "tallas": [
         "S",
         "M",
@@ -409,6 +419,354 @@
       "direccionEnvio": "Calle 10 # 5-20, Bogotá",
       "telefono": "+57 300 123 4567",
       "metodoPago": "Tarjeta de Crédito"
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 2,
+          "nombre": "Camiseta Adidas Techfit Compression",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Negro",
+          "precioUnitario": 110000
+        }
+      ],
+      "total": 110000,
+      "estado": "Confirmada",
+      "direccionEnvio": "Calle 25 # 21-39, Soledad",
+      "telefono": "+573009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 2
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 3,
+          "nombre": "Camiseta Under Armour HeatGear",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Blanco",
+          "precioUnitario": 125000
+        }
+      ],
+      "total": 125000,
+      "estado": "Confirmada",
+      "direccionEnvio": "Calle 25 # 21-39, Soledad",
+      "telefono": "+573009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 3
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 2,
+          "nombre": "Camiseta Adidas Techfit Compression",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Negro",
+          "precioUnitario": 110000
+        }
+      ],
+      "total": 110000,
+      "estado": "Confirmada",
+      "direccionEnvio": "Calle 25 # 21-39, Soledad",
+      "telefono": "+573009969889",
+      "metodoPago": "Tarjeta de Crédito",
+      "id": 4
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 3,
+          "nombre": "Camiseta Under Armour HeatGear",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Blanco",
+          "precioUnitario": 125000
+        }
+      ],
+      "total": 125000,
+      "estado": "Confirmada",
+      "direccionEnvio": "CAlle 25a # 21-39, Soledad/Atlantico",
+      "telefono": "3009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 5
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 2,
+          "nombre": "Camiseta Adidas Techfit Compression",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Negro",
+          "precioUnitario": 110000
+        }
+      ],
+      "total": 110000,
+      "estado": "Confirmada",
+      "direccionEnvio": "CAlle 25a # 21-39, Soledad/Atlantico",
+      "telefono": "3009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 6
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 1,
+          "nombre": "Camiseta Nike Dri-FIT Academy",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Negro",
+          "precioUnitario": 95000
+        }
+      ],
+      "total": 95000,
+      "estado": "Confirmada",
+      "direccionEnvio": "CAlle 25a # 21-39, Soledad/Atlantico",
+      "telefono": "3009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 7
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 7,
+          "nombre": "Short Nike Pro Dri-FIT 5''",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Negro",
+          "precioUnitario": 85000
+        }
+      ],
+      "total": 85000,
+      "estado": "Confirmada",
+      "direccionEnvio": "Calle 25 # 21-39, Soledad",
+      "telefono": "+573009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 8
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 4,
+          "nombre": "Zapatillas Nike Air Zoom Pegasus 40",
+          "cantidad": 1,
+          "talla": "38",
+          "color": "Blanco/Azul",
+          "precioUnitario": 420000
+        }
+      ],
+      "total": 420000,
+      "estado": "Confirmada",
+      "direccionEnvio": "Calle 25 # 21-39, Soledad",
+      "telefono": "+573009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 9
+    },
+    {
+      "userId": 2,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 6,
+          "nombre": "Corsé Bordado Flor de Lis",
+          "cantidad": 1,
+          "talla": "XS",
+          "color": "Negro",
+          "precioUnitario": 180000
+        },
+        {
+          "productoId": 1,
+          "nombre": "Vestido de Noche Silk Imperial",
+          "cantidad": 1,
+          "talla": "L",
+          "color": "Negro",
+          "precioUnitario": 280000
+        }
+      ],
+      "total": 460000,
+      "estado": "Confirmada",
+      "direccionEnvio": "CAlle 25a # 21-39, Soledad/Atlantico",
+      "telefono": "3009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 10
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 2,
+          "nombre": "Camiseta Adidas Techfit Compression",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Negro",
+          "precioUnitario": 110000
+        }
+      ],
+      "total": 110000,
+      "estado": "Confirmada",
+      "direccionEnvio": "Calle 25 # 21-39, Soledad",
+      "telefono": "+573009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 11
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 2,
+          "nombre": "Camiseta Adidas Techfit Compression",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Negro",
+          "precioUnitario": 110000
+        }
+      ],
+      "total": 110000,
+      "estado": "Confirmada",
+      "direccionEnvio": "Calle 25 # 21-39, Soledad",
+      "telefono": "+573009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 12
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 1,
+          "nombre": "Camiseta Nike Dri-FIT Academy",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Negro",
+          "precioUnitario": 95000
+        }
+      ],
+      "total": 95000,
+      "estado": "Confirmada",
+      "direccionEnvio": "Calle 25 # 21-39, Soledad",
+      "telefono": "+573009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 13
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 2,
+          "nombre": "Camiseta Adidas Techfit Compression",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Negro",
+          "precioUnitario": 110000
+        }
+      ],
+      "total": 110000,
+      "estado": "Confirmada",
+      "direccionEnvio": "Calle 25 # 21-39, Soledad",
+      "telefono": "+573009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 14
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 3,
+          "nombre": "Camiseta Under Armour HeatGear",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Blanco",
+          "precioUnitario": 125000
+        }
+      ],
+      "total": 125000,
+      "estado": "Confirmada",
+      "direccionEnvio": "Calle 25 # 21-39, Soledad",
+      "telefono": "+573009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 15
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 3,
+          "nombre": "Camiseta Under Armour HeatGear",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Blanco",
+          "precioUnitario": 125000
+        }
+      ],
+      "total": 125000,
+      "estado": "Confirmada",
+      "direccionEnvio": "Calle 25 # 21-39, Soledad",
+      "telefono": "+573009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 16
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 3,
+          "nombre": "Camiseta Under Armour HeatGear",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Blanco",
+          "precioUnitario": 125000
+        }
+      ],
+      "total": 125000,
+      "estado": "Confirmada",
+      "direccionEnvio": "Calle 25 # 21-39, Soledad",
+      "telefono": "+573009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 17
+    },
+    {
+      "userId": 3,
+      "fecha": "2026-07-05",
+      "productos": [
+        {
+          "productoId": 17,
+          "nombre": "Chaqueta Adidas Tiro 23 Track Jacket",
+          "cantidad": 1,
+          "talla": "S",
+          "color": "Negro/Blanco",
+          "precioUnitario": 175000
+        }
+      ],
+      "total": 175000,
+      "estado": "Confirmada",
+      "direccionEnvio": "Calle 25 # 21-39, Soledad",
+      "telefono": "+573009969889",
+      "metodoPago": "Transferencia Bancaria",
+      "id": 18
     }
   ]
 }
