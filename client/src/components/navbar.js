@@ -2,7 +2,6 @@ import { obtenerSesion, cerrarSesion } from "../services/auth.service.js";
 import { renderThemeToggle, setupThemeToggle } from "../utils/theme.js";
 import { obtenerCantidadTotal } from "../utils/cart.js";
 import { navigate } from "../router/router.js";
-//cambios// 
 
 export function renderNavbar() {
   const usuario = obtenerSesion();
