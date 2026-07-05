@@ -12,32 +12,32 @@ export function renderAdmin() {
   return `
   ${renderNavbar()}
 
-  <main class="min-h-screen bg-stone-50 dark:bg-stone-950 transition-colors py-12">
+  <main class="min-h-screen bg-zinc-50 dark:bg-zinc-950 transition-colors py-12">
     <div class="mx-auto max-w-6xl px-6">
       
       <!-- Cabecera panel -->
       <div class="mb-10 text-center md:text-left">
-        <span class="text-xs font-bold uppercase tracking-widest text-rosegold-500">Dirección General</span>
-        <h1 class="text-4xl font-bold text-burgundy-850 dark:text-rosegold-400 font-serif mt-2">Panel Administrativo</h1>
-        <p class="text-slate-550 dark:text-stone-400 text-sm mt-1">Control de catálogo, órdenes de costura y usuarios registrados.</p>
+        <span class="text-xs font-bold uppercase tracking-widest text-sport-500">Administración</span>
+        <h1 class="text-4xl font-black uppercase text-zinc-900 dark:text-white font-display mt-2">Panel Administrativo</h1>
+        <p class="text-slate-500 dark:text-stone-400 text-sm mt-1">Control de catálogo deportivo, órdenes y usuarios registrados.</p>
       </div>
 
       <!-- Navegación de Pestañas -->
-      <div class="flex flex-wrap border-b border-stone-250 dark:border-stone-850 gap-4 mb-8">
+      <div class="flex flex-wrap border-b border-zinc-200 dark:border-zinc-800 gap-4 mb-8">
         <button class="tab-btn px-5 py-3 text-sm font-bold border-b-2 transition-all cursor-pointer ${
-          pestañaActiva === "kpis" ? "border-rosegold-500 text-burgundy-850 dark:text-rosegold-400" : "border-transparent text-slate-500 dark:text-stone-400 hover:text-slate-800"
+          pestañaActiva === "kpis" ? "border-sport-500 text-sport-500" : "border-transparent text-slate-500 dark:text-stone-400 hover:text-slate-800"
         }" data-tab="kpis">📊 Métricas</button>
         
         <button class="tab-btn px-5 py-3 text-sm font-bold border-b-2 transition-all cursor-pointer ${
-          pestañaActiva === "productos" ? "border-rosegold-500 text-burgundy-850 dark:text-rosegold-400" : "border-transparent text-slate-500 dark:text-stone-400 hover:text-slate-800"
-        }" data-tab="productos">👗 Inventario</button>
+          pestañaActiva === "productos" ? "border-sport-500 text-sport-500" : "border-transparent text-slate-500 dark:text-stone-400 hover:text-slate-800"
+        }" data-tab="productos">🏋️ Inventario</button>
         
         <button class="tab-btn px-5 py-3 text-sm font-bold border-b-2 transition-all cursor-pointer ${
-          pestañaActiva === "ordenes" ? "border-rosegold-500 text-burgundy-850 dark:text-rosegold-400" : "border-transparent text-slate-500 dark:text-stone-400 hover:text-slate-800"
-        }" data-tab="ordenes">🧺 Pedidos</button>
+          pestañaActiva === "ordenes" ? "border-sport-500 text-sport-500" : "border-transparent text-slate-500 dark:text-stone-400 hover:text-slate-800"
+        }" data-tab="ordenes">📦 Pedidos</button>
         
         <button class="tab-btn px-5 py-3 text-sm font-bold border-b-2 transition-all cursor-pointer ${
-          pestañaActiva === "usuarios" ? "border-rosegold-500 text-burgundy-850 dark:text-rosegold-400" : "border-transparent text-slate-500 dark:text-stone-400 hover:text-slate-800"
+          pestañaActiva === "usuarios" ? "border-sport-500 text-sport-500" : "border-transparent text-slate-500 dark:text-stone-400 hover:text-slate-800"
         }" data-tab="usuarios">👥 Cuentas</button>
       </div>
 
@@ -45,8 +45,8 @@ export function renderAdmin() {
       <div id="admin-tab-content">
         <!-- Spinner -->
         <div class="py-24 flex flex-col items-center justify-center text-slate-400 gap-4">
-          <div class="h-10 w-10 animate-spin rounded-full border-4 border-slate-300 border-t-burgundy-850"></div>
-          <p class="text-sm font-semibold text-stone-500 font-serif">Organizando Atelier...</p>
+          <div class="h-10 w-10 animate-spin rounded-full border-4 border-slate-300 border-t-sport-500"></div>
+          <p class="text-sm font-semibold text-zinc-500">Cargando panel...</p>
         </div>
       </div>
 
@@ -74,33 +74,33 @@ async function cargarPestaña() {
 
       tabContent.innerHTML = `
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
-        <div class="bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-2xl p-6 shadow-sm">
+        <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
           <span class="text-2xl">💰</span>
-          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-450 dark:text-stone-400 mt-4">Ventas Brutas</h3>
-          <p class="text-3xl font-extrabold text-burgundy-850 dark:text-rosegold-400 font-serif mt-2">$${totalVentas.toLocaleString()}</p>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-stone-400 mt-4">Ventas Brutas</h3>
+          <p class="text-3xl font-extrabold text-sport-500 dark:text-sport-400 font-display mt-2">$${totalVentas.toLocaleString()}</p>
         </div>
-        <div class="bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-2xl p-6 shadow-sm">
-          <span class="text-2xl">👔</span>
-          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-450 dark:text-stone-400 mt-4">Pedidos Recibidos</h3>
-          <p class="text-3xl font-extrabold text-burgundy-850 dark:text-rosegold-400 font-serif mt-2">${ordenes.length}</p>
+        <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
+          <span class="text-2xl">📦</span>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-stone-400 mt-4">Pedidos Recibidos</h3>
+          <p class="text-3xl font-extrabold text-sport-500 dark:text-sport-400 font-display mt-2">${ordenes.length}</p>
         </div>
-        <div class="bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-2xl p-6 shadow-sm">
-          <span class="text-2xl">🪡</span>
-          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-450 dark:text-stone-400 mt-4">Stock en Inventario</h3>
-          <p class="text-3xl font-extrabold text-burgundy-850 dark:text-rosegold-400 font-serif mt-2">${prendasStock} prendas</p>
+        <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
+          <span class="text-2xl">🏋️</span>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-stone-400 mt-4">Stock en Inventario</h3>
+          <p class="text-3xl font-extrabold text-sport-500 dark:text-sport-400 font-display mt-2">${prendasStock} uds.</p>
         </div>
-        <div class="bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-2xl p-6 shadow-sm">
+        <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
           <span class="text-2xl">👤</span>
-          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-450 dark:text-stone-400 mt-4">Clientes Registrados</h3>
-          <p class="text-3xl font-extrabold text-burgundy-850 dark:text-rosegold-400 font-serif mt-2">${usuarios.length}</p>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-stone-400 mt-4">Clientes Registrados</h3>
+          <p class="text-3xl font-extrabold text-sport-500 dark:text-sport-400 font-display mt-2">${usuarios.length}</p>
         </div>
       </div>
 
       <!-- Resumen gráfico / analítico simple -->
-      <div class="rounded-3xl bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 p-8 shadow-sm">
-        <h3 class="text-lg font-bold text-burgundy-850 dark:text-stone-100 font-serif mb-4">Información del Sistema</h3>
+      <div class="rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-8 shadow-sm">
+        <h3 class="text-lg font-black uppercase text-zinc-900 dark:text-white font-display mb-4">Información del Sistema</h3>
         <p class="text-sm text-slate-500 dark:text-stone-400 leading-relaxed">
-          Este panel interactúa directamente con la simulación del API en <code>json-server</code>. Las compras de los usuarios restan stock de forma automatizada y actualizan las métricas. Utilice las pestañas superiores para administrar los elementos de datos del Atelier.
+          Este panel interactúa directamente con la simulación del API en <code>json-server</code>. Las compras de los usuarios restan stock de forma automatizada y actualizan las métricas. Utilice las pestañas superiores para administrar el inventario deportivo de SportZone.
         </p>
       </div>
       `;
@@ -111,34 +111,34 @@ async function cargarPestaña() {
 
       tabContent.innerHTML = `
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-bold text-burgundy-850 dark:text-stone-100 font-serif">Inventario de Prendas</h2>
-        <button id="add-product-btn" class="rounded-full bg-burgundy-800 hover:bg-burgundy-600 px-5 py-2 text-xs font-bold text-white transition-all cursor-pointer">
-          🧵 Registrar Nueva Prenda
+        <h2 class="text-xl font-black uppercase text-zinc-900 dark:text-white font-display">Inventario Deportivo</h2>
+        <button id="add-product-btn" class="rounded-full bg-sport-500 hover:bg-sport-600 px-5 py-2 text-xs font-bold text-white transition-all cursor-pointer">
+          ⚡ Registrar Producto
         </button>
       </div>
 
-      <div class="overflow-x-auto bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-2xl">
+      <div class="overflow-x-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl">
         <table class="w-full text-left text-sm">
-          <thead class="bg-stone-100 dark:bg-stone-950 text-xs font-bold uppercase text-slate-500 dark:text-stone-400 border-b border-stone-200 dark:border-stone-850">
+          <thead class="bg-zinc-100 dark:bg-zinc-950 text-xs font-bold uppercase text-slate-500 dark:text-stone-400 border-b border-zinc-200 dark:border-zinc-800">
             <tr>
-              <th class="px-6 py-4">Prenda</th>
+              <th class="px-6 py-4">Producto</th>
               <th class="px-6 py-4">Categoría</th>
               <th class="px-6 py-4">Precio</th>
               <th class="px-6 py-4">Stock</th>
               <th class="px-6 py-4 text-right">Acciones</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-stone-200 dark:divide-stone-850">
+          <tbody class="divide-y divide-zinc-200 dark:divide-zinc-800">
             ${productos.map(p => {
               return `
               <tr>
                 <td class="px-6 py-4 flex items-center gap-3">
-                  <img src="${p.imagen}" class="w-10 h-10 rounded-lg object-cover shrink-0 bg-stone-200" />
+                  <img src="${p.imagen}" class="w-10 h-10 rounded-lg object-cover shrink-0 bg-zinc-200" />
                   <span class="font-bold text-slate-800 dark:text-white">${p.nombre}</span>
                 </td>
                 <td class="px-6 py-4 text-slate-600 dark:text-stone-300">${p.categoria}</td>
-                <td class="px-6 py-4 font-bold text-burgundy-850 dark:text-rosegold-400">$${p.precio.toLocaleString()}</td>
-                <td class="px-6 py-4 text-slate-650 dark:text-stone-350">${p.stock} u.</td>
+                <td class="px-6 py-4 font-bold text-sport-500 dark:text-sport-400">$${p.precio.toLocaleString()}</td>
+                <td class="px-6 py-4 text-slate-600 dark:text-stone-300">${p.stock} u.</td>
                 <td class="px-6 py-4 text-right flex items-center justify-end gap-3 mt-1.5">
                   <button class="edit-prod-btn text-xs font-bold text-blue-600 hover:underline cursor-pointer" data-id="${p.id}">Editar</button>
                   <button class="delete-prod-btn text-xs font-bold text-red-500 hover:underline cursor-pointer" data-id="${p.id}">Eliminar</button>
@@ -170,12 +170,12 @@ async function cargarPestaña() {
       document.querySelectorAll(".delete-prod-btn").forEach(btn => {
         btn.addEventListener("click", async () => {
           const id = btn.getAttribute("data-id");
-          if (confirm("¿Estás seguro de que deseas eliminar esta prenda permanentemente?")) {
+          if (confirm("¿Estás seguro de que deseas eliminar este producto permanentemente?")) {
             try {
               await eliminarProducto(id);
               cargarPestaña();
             } catch (err) {
-              alert("Error al eliminar la prenda.");
+              alert("Error al eliminar el producto.");
             }
           }
         });
@@ -187,11 +187,11 @@ async function cargarPestaña() {
       const usuarios = await obtenerUsuarios();
 
       tabContent.innerHTML = `
-      <h2 class="text-xl font-bold text-burgundy-850 dark:text-stone-100 font-serif mb-6">Registro de Pedidos Recibidos</h2>
+      <h2 class="text-xl font-black uppercase text-zinc-900 dark:text-white font-display mb-6">Registro de Pedidos Recibidos</h2>
 
-      <div class="overflow-x-auto bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-2xl">
+      <div class="overflow-x-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl">
         <table class="w-full text-left text-sm">
-          <thead class="bg-stone-100 dark:bg-stone-950 text-xs font-bold uppercase text-slate-500 dark:text-stone-400 border-b border-stone-200 dark:border-stone-850">
+          <thead class="bg-zinc-100 dark:bg-zinc-950 text-xs font-bold uppercase text-slate-500 dark:text-stone-400 border-b border-zinc-200 dark:border-zinc-800">
             <tr>
               <th class="px-6 py-4">Orden ID</th>
               <th class="px-6 py-4">Cliente</th>

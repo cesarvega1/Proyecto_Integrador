@@ -23,117 +23,362 @@
   ],
   "productos": [
     {
-      "nombre": "Vestido de Noche Silk Imperial",
-      "descripcion": "Vestido largo de gala confeccionado en seda pura natural. Presenta un escote en V pronunciado en la espalda, falda fluida de corte A y detalles de costura invisibles hechos a mano. Perfecto para bodas o eventos formales.",
-      "categoria": "Vestidos",
-      "precio": 280000,
-      "stock": 8,
+      "nombre": "Camiseta Nike Dri-FIT Academy",
+      "descripcion": "Camiseta técnica de entrenamiento Nike con tecnología Dri-FIT que aleja la humedad de la piel para mantenerte seco y cómodo. Confeccionada en 100% poliéster reciclado con ajuste estándar. Ideal para fútbol, atletismo y entrenamiento en gimnasio.",
+      "categoria": "Camisetas",
+      "precio": 95000,
+      "stock": 25,
       "tallas": [
         "S",
         "M",
-        "L"
+        "L",
+        "XL",
+        "XXL"
       ],
       "colores": [
-        "Borgoña",
         "Negro",
-        "Azul Marino"
+        "Blanco",
+        "Azul Royal",
+        "Rojo"
       ],
-      "imagen": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&auto=format&fit=crop&q=80",
+      "imagen": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=80",
       "id": 1
     },
     {
       "id": 2,
-      "nombre": "Traje Sastre Lana Italiana",
-      "descripcion": "Conjunto de chaqueta cruzada estructurada con forro de satén jacquard y pantalones de corte recto y talle alto. Confeccionado en lana virgen italiana transpirable. El epítome de la sofisticación ejecutiva.",
-      "categoria": "Trajes",
-      "precio": 350000,
-      "stock": 5,
+      "nombre": "Camiseta Adidas Techfit Compression",
+      "descripcion": "Camiseta de compresión Adidas Techfit diseñada para maximizar el rendimiento muscular durante el ejercicio. Tejido elástico de 4 vías que se adapta a cada movimiento. Tecnología AEROREADY para mantenerte seco. Perfecta para running, ciclismo y CrossFit.",
+      "categoria": "Camisetas",
+      "precio": 110000,
+      "stock": 18,
       "tallas": [
+        "S",
         "M",
         "L",
         "XL"
       ],
       "colores": [
-        "Gris Oxford",
         "Negro",
-        "Azul Marino"
+        "Azul Marino",
+        "Gris Oscuro"
       ],
-      "imagen": "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=500&auto=format&fit=crop&q=80"
+      "imagen": "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500&auto=format&fit=crop&q=80"
     },
     {
       "id": 3,
-      "nombre": "Blusa Victoriana Encaje Francés",
-      "descripcion": "Blusa romántica de gasa de seda translúcida con cuello alto camisero, pechera plisada y mangas abullonadas con puños adornados en encaje de Chantilly. Ideal para combinar con faldas tubo o pantalones sastres.",
-      "categoria": "Blusas",
-      "precio": 120000,
-      "stock": 12,
+      "nombre": "Camiseta Under Armour HeatGear",
+      "descripcion": "Camiseta Under Armour de manga corta con tecnología HeatGear que regula la temperatura corporal en condiciones de calor extremo. Tela ultraligera con UPF 30 para protección solar. Costuras planas anti-rozadura. Ideal para deportes al aire libre y entrenamiento intenso.",
+      "categoria": "Camisetas",
+      "precio": 125000,
+      "stock": 14,
       "tallas": [
-        "XS",
         "S",
         "M",
-        "L"
+        "L",
+        "XL",
+        "XXL"
       ],
       "colores": [
-        "Crema",
-        "Blanco"
+        "Blanco",
+        "Negro",
+        "Naranja",
+        "Verde Lima"
       ],
-      "imagen": "https://images.unsplash.com/photo-1548624149-f9b1859aa7d0?w=500&auto=format&fit=crop&q=80"
+      "imagen": "https://images.unsplash.com/photo-1571945153237-4929e783af4a?w=500&auto=format&fit=crop&q=80"
     },
     {
       "id": 4,
-      "nombre": "Falda Plisada Satén Dorado",
-      "descripcion": "Falda midi plisada a presión técnica que retiene la forma tras los lavados. Confeccionada en raso de satén pesado con caída espectacular y una pretina fina elástica oculta. Destaca por su elegante brillo metálico.",
-      "categoria": "Faldas",
-      "precio": 150000,
+      "nombre": "Zapatillas Nike Air Zoom Pegasus 40",
+      "descripcion": "Las Nike Air Zoom Pegasus 40 combinan amortiguación Air Zoom reactiva con una placa de fibra de carbono para máxima propulsión. Upper en malla transpirable con soporte estructural en los laterales. Suela de goma de alta tracción para superficies variadas. El calzado preferido de los corredores de larga distancia.",
+      "categoria": "Calzado",
+      "precio": 420000,
+      "stock": 10,
+      "tallas": [
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44"
+      ],
+      "colores": [
+        "Blanco/Azul",
+        "Negro/Naranja",
+        "Gris/Verde"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 5,
+      "nombre": "Zapatillas Adidas Ultraboost 23",
+      "descripcion": "Las Adidas Ultraboost 23 presentan la amortiguación Boost más avanzada hasta la fecha, con retorno de energía excepcional en cada pisada. Upper Primeknit+ se adapta como un calcetín al pie. Suela Continental Rubber para máximo agarre en cualquier superficie. El calzado definitivo para running y uso casual.",
+      "categoria": "Calzado",
+      "precio": 480000,
+      "stock": 8,
+      "tallas": [
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45"
+      ],
+      "colores": [
+        "Blanco/Dorado",
+        "Negro",
+        "Azul/Blanco"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 6,
+      "nombre": "Zapatillas New Balance Fresh Foam X 1080v13",
+      "descripcion": "Las New Balance Fresh Foam X 1080v13 ofrecen la experiencia de carrera más suave de New Balance gracias a su mediasuela de espuma Fresh Foam X de alta densidad. Upper en malla Hypoknit ultrasuave sin costuras. Contrafuerte del talón integrado para estabilidad. Perfectas para rodajes largos y runners de neutro a supinador.",
+      "categoria": "Calzado",
+      "precio": 395000,
+      "stock": 12,
+      "tallas": [
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44"
+      ],
+      "colores": [
+        "Gris/Naranja",
+        "Blanco",
+        "Negro/Blanco"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1600185365778-5a4a4c1f0e9d?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 7,
+      "nombre": "Short Nike Pro Dri-FIT 5''",
+      "descripcion": "Short deportivo Nike Pro de 5 pulgadas con forro de compresión integrado para soporte muscular. Tejido Dri-FIT estándar con gráficos de ventilación estratégica en zonas de calor. Cintura elástica con cordón ajustable y bolsillo lateral con cierre. Perfecto para running, entrenamiento funcional y deportes de equipo.",
+      "categoria": "Pantalonetas",
+      "precio": 85000,
+      "stock": 22,
+      "tallas": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colores": [
+        "Negro",
+        "Azul Marino",
+        "Rojo/Negro"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 8,
+      "nombre": "Short Adidas Own the Run",
+      "descripcion": "Short de running Adidas Own the Run fabricado en tela reciclada AEROREADY. Diseño de 7 pulgadas con abertura lateral para mayor libertad de movimiento. Bolsillo con cremallera en la parte trasera y bolsillo de malla interior. Reflectivos 3M para visibilidad en condiciones de poca luz.",
+      "categoria": "Pantalonetas",
+      "precio": 92000,
+      "stock": 16,
+      "tallas": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "colores": [
+        "Negro",
+        "Gris Heather",
+        "Azul Marino/Blanco"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1562886812-41775a01195d?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 9,
+      "nombre": "Short Under Armour Launch Elite 5''",
+      "descripcion": "Short de alto rendimiento Under Armour Launch Elite con tejido HeatGear ultraligero y transpirable. Corte ergonómico con 5 pulgadas de largo, forro de malla interior y bolsillo trasero con cierre. Cintura de corte bajo con cordón interno. Ideal para runners de élite y triatletas.",
+      "categoria": "Pantalonetas",
+      "precio": 115000,
+      "stock": 9,
+      "tallas": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colores": [
+        "Negro",
+        "Naranja/Negro",
+        "Azul/Blanco"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 10,
+      "nombre": "Balón Nike Flight Premier League",
+      "descripcion": "Balón oficial de la Premier League con tecnología Nike Aerowsculpt que permite un vuelo más preciso y estable. 12 paneles de poliuretano termofusionado con textura de agarre mejorada. Vejiga de butilo retención de presión superior. Tamaño 5 reglamentario. Incluye certificación FIFA Quality Pro.",
+      "categoria": "Balones",
+      "precio": 180000,
+      "stock": 15,
+      "tallas": [
+        "No. 5"
+      ],
+      "colores": [
+        "Blanco/Azul/Rojo",
+        "Negro/Dorado"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1614632537190-23e4e1f8e938?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 11,
+      "nombre": "Balón Adidas Champions League UCL Pro",
+      "descripcion": "Balón oficial de la UEFA Champions League fabricado en poliuretano de alta calidad con cámara de látex para un tacto suave y rebote predecible. Estructura de 20 paneles cosidos a máquina con tecnología Thermalbonding. Talla 5 reglamentaria. Diseño estrellado icónico de la Champions League.",
+      "categoria": "Balones",
+      "precio": 210000,
+      "stock": 11,
+      "tallas": [
+        "No. 5"
+      ],
+      "colores": [
+        "Blanco/Azul Marino/Dorado"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 12,
+      "nombre": "Balón de Baloncesto Spalding NBA Zi/O Excel",
+      "descripcion": "Balón de baloncesto Spalding Zi/O Excel fabricado en piel sintética de alta durabilidad para juego en interiores y exteriores. Canales profundos para mejor control y agarre. Cámara de butilo de larga vida con válvula de alta retención. Talla 7 oficial NBA. Ideal para ligas amateurs y semiprofesionales.",
+      "categoria": "Balones",
+      "precio": 145000,
+      "stock": 7,
+      "tallas": [
+        "No. 7"
+      ],
+      "colores": [
+        "Naranja/Negro"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 13,
+      "nombre": "Guantes Everlast Pro Style Training",
+      "descripcion": "Guantes de boxeo Everlast Pro Style con relleno de espuma EverFoam de alta densidad para protección superior en entrenamiento de saco y mitt. Cierre de velcro con soporte de muñeca integrado. Forro interior de microfibra antimicrobiana que absorbe el sudor. Aptos para sparring ligero, saco pesado y pad training.",
+      "categoria": "Accesorios",
+      "precio": 98000,
+      "stock": 14,
+      "tallas": [
+        "10oz",
+        "12oz",
+        "14oz",
+        "16oz"
+      ],
+      "colores": [
+        "Rojo/Negro",
+        "Azul/Negro",
+        "Negro"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 14,
+      "nombre": "Rodilleras McDavid HEX Technology",
+      "descripcion": "Rodilleras de compresión McDavid con tecnología HEX que distribuye el impacto en toda la superficie de la rodilla. Tejido de compresión 4 vías con gel de silicona antimigración. Costuras planas para máxima comodidad. Diseñadas para baloncesto, voleibol y deportes de contacto. Venta por par.",
+      "categoria": "Accesorios",
+      "precio": 72000,
+      "stock": 20,
+      "tallas": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colores": [
+        "Negro",
+        "Blanco"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 15,
+      "nombre": "Mochila Nike Brasilia 9.5 Training",
+      "descripcion": "Mochila deportiva Nike Brasilia 9.5 con capacidad de 24 litros y compartimiento principal con organización interior. Bolsillo lateral de malla para botella de agua, compartimiento separado para calzado con ventilación y tira acolchada para colgar. Correas acolchadas ajustables y panel trasero aireado. Resistente al agua.",
+      "categoria": "Accesorios",
+      "precio": 135000,
+      "stock": 18,
+      "tallas": [
+        "Único"
+      ],
+      "colores": [
+        "Negro/Blanco",
+        "Azul/Negro",
+        "Gris/Naranja"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 16,
+      "nombre": "Chaqueta Nike Windrunner Repel",
+      "descripcion": "Chaqueta cortavientos Nike Windrunner con tratamiento DWR (Durable Water Repellent) que repele lluvia ligera. Tejido ultraligero y transpirable con capucha ajustable integrada. Diseño plegable que se guarda en su propio bolsillo. Cremalleras en los bolsillos laterales y cinta reflectiva para visibilidad nocturna. Ideal para running y ciclismo.",
+      "categoria": "Chaquetas",
+      "precio": 210000,
       "stock": 10,
       "tallas": [
         "S",
         "M",
-        "L"
+        "L",
+        "XL",
+        "XXL"
       ],
       "colores": [
-        "Champán",
-        "Verde Esmeralda",
-        "Rosa Palo"
+        "Negro",
+        "Azul Marino",
+        "Rojo/Negro"
       ],
-      "imagen": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500&auto=format&fit=crop&q=80"
+      "imagen": "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/7eed5693-8534-4dd4-b8c8-dd12c2ca9305/M+NK+IMP+LGHT+WINDRNNER+JKT.png"
     },
     {
-      "id": 5,
-      "nombre": "Abrigo Sastreado Cachemira",
-      "descripcion": "Abrigo clásico de solapa ancha y doble botonadura en carey sintético. Elaborado en mezcla de lana merino y cachemira premium de tacto ultrasuave. Incluye bolsillos de plastrón invisibles y forro térmico.",
-      "categoria": "Sacos",
-      "precio": 450000,
-      "stock": 3,
+      "id": 17,
+      "nombre": "Chaqueta Adidas Tiro 23 Track Jacket",
+      "descripcion": "Chaqueta de entrenamiento Adidas Tiro 23 fabricada en tela de doble capa con tecnología AEROREADY. Cremallera completa frontal con cuello alto, bolsillos laterales con cremallera y puños con goma elástica. Diseño slim fit con tres rayas clásicas Adidas. Perfecta para fútbol, entrenamiento y uso casual deportivo.",
+      "categoria": "Chaquetas",
+      "precio": 175000,
+      "stock": 13,
       "tallas": [
+        "S",
         "M",
         "L",
         "XL"
       ],
       "colores": [
-        "Camel",
-        "Negro",
-        "Borgoña"
+        "Negro/Blanco",
+        "Azul Marino/Dorado",
+        "Rojo/Negro"
       ],
-      "imagen": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=500&auto=format&fit=crop&q=80"
+      "imagen": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500&auto=format&fit=crop&q=80"
     },
     {
-      "id": 6,
-      "nombre": "Corsé Bordado Flor de Lis",
-      "descripcion": "Corsé de alta costura para exterior. Presenta varillas de soporte flexibles que definen la silueta y bordados artesanales de hilos dorados sobre terciopelo de algodón. Cierre trasero con cordones regulables.",
-      "categoria": "Accesorios",
-      "precio": 180000,
-      "stock": 7,
+      "id": 18,
+      "nombre": "Chaqueta Under Armour Storm ColdGear",
+      "descripcion": "Chaqueta Under Armour Storm ColdGear con tecnología de dos capas que ofrece aislamiento térmico sin añadir peso. Tratamiento Storm repele la lluvia y el viento sin sacrificar transpirabilidad. Bolsillos laterales con cremallera YKK, manga con agujero para el pulgar y capucha ajustable. Ideal para entrenamientos en frío extremo.",
+      "categoria": "Chaquetas",
+      "precio": 245000,
+      "stock": 6,
       "tallas": [
-        "XS",
         "S",
-        "M"
+        "M",
+        "L",
+        "XL"
       ],
       "colores": [
         "Negro",
-        "Rojo Rubí"
+        "Gris/Negro",
+        "Azul Oscuro"
       ],
-      "imagen": "https://images.unsplash.com/photo-1618244972963-dbee1a7edc95?w=500&auto=format&fit=crop&q=80"
+      "imagen": "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/7eed5693-8534-4dd4-b8c8-dd12c2ca9305/M+NK+IMP+LGHT+WINDRNNER+JKT.png"
     }
   ],
   "ordenes": [
@@ -144,14 +389,22 @@
       "productos": [
         {
           "productoId": 1,
-          "nombre": "Vestido de Noche Silk Imperial",
-          "cantidad": 1,
+          "nombre": "Camiseta Nike Dri-FIT Academy",
+          "cantidad": 2,
           "talla": "M",
-          "color": "Borgoña",
-          "precioUnitario": 280000
+          "color": "Negro",
+          "precioUnitario": 95000
+        },
+        {
+          "productoId": 4,
+          "nombre": "Zapatillas Nike Air Zoom Pegasus 40",
+          "cantidad": 1,
+          "talla": "42",
+          "color": "Blanco/Azul",
+          "precioUnitario": 420000
         }
       ],
-      "total": 280000,
+      "total": 610000,
       "estado": "Entregado",
       "direccionEnvio": "Calle 10 # 5-20, Bogotá",
       "telefono": "+57 300 123 4567",

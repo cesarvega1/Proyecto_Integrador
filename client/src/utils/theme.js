@@ -30,6 +30,7 @@ export function renderThemeToggle() {
   `;
 }
 
+
 export function setupThemeToggle() {
     const btn = document.getElementById("theme-toggle");
     const icon = document.getElementById("theme-icon");
