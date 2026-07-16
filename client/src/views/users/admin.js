@@ -3,6 +3,8 @@ import { renderFooter } from "../../components/footer.js";
 import { obtenerProductos, eliminarProducto } from "../../services/product.service.js";
 import { obtenerOrdenes, actualizarEstadoOrden } from "../../services/order.service.js";
 import { obtenerUsuarios, actualizarRolUsuario } from "../../services/user.service.js";
+import { obtenerCierres, crearCierre } from "../../services/closure.service.js";
+import Chart from 'chart.js/auto';
 import { navigate } from "../../router/router.js";
 
 // Estado de la pestaña activa local
@@ -67,22 +69,31 @@ async function cargarPestaña() {
       const productos = await obtenerProductos();
       const ordenes = await obtenerOrdenes();
       const usuarios = await obtenerUsuarios();
+      const cierres = await obtenerCierres();
 
-      // Métricas clave
-      const totalVentas = ordenes.reduce((acc, o) => acc + o.total, 0);
+      // Métricas clave (solo órdenes no cerradas para el día actual)
+      const ordenesActivas = ordenes.filter(o => o.cerrada !== 1);
+      const totalVentas = ordenesActivas.reduce((acc, o) => acc + o.total, 0);
       const prendasStock = productos.reduce((acc, p) => acc + p.stock, 0);
 
       tabContent.innerHTML = `
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-black uppercase text-zinc-900 dark:text-white font-display">Resumen del Día</h2>
+        <button id="btn-cerrar-dia" class="rounded-full bg-red-500 hover:bg-red-600 px-5 py-2 text-xs font-bold text-white transition-all cursor-pointer shadow-md">
+          🛑 Cerrar Día
+        </button>
+      </div>
+
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
         <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
           <span class="text-2xl">💰</span>
-          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-stone-400 mt-4">Ventas Brutas</h3>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-stone-400 mt-4">Ventas Brutas (Hoy)</h3>
           <p class="text-3xl font-extrabold text-sport-500 dark:text-sport-400 font-display mt-2">$${totalVentas.toLocaleString()}</p>
         </div>
         <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
           <span class="text-2xl">📦</span>
-          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-stone-400 mt-4">Pedidos Recibidos</h3>
-          <p class="text-3xl font-extrabold text-sport-500 dark:text-sport-400 font-display mt-2">${ordenes.length}</p>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-stone-400 mt-4">Pedidos (Hoy)</h3>
+          <p class="text-3xl font-extrabold text-sport-500 dark:text-sport-400 font-display mt-2">${ordenesActivas.length}</p>
         </div>
         <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
           <span class="text-2xl">🏋️</span>
@@ -98,12 +109,61 @@ async function cargarPestaña() {
 
       <!-- Resumen gráfico / analítico simple -->
       <div class="rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-8 shadow-sm">
-        <h3 class="text-lg font-black uppercase text-zinc-900 dark:text-white font-display mb-4">Información del Sistema</h3>
-        <p class="text-sm text-slate-500 dark:text-stone-400 leading-relaxed">
-          Este panel interactúa directamente con la simulación del API en <code>json-server</code>. Las compras de los usuarios restan stock de forma automatizada y actualizan las métricas. Utilice las pestañas superiores para administrar el inventario deportivo de SportZone.
+        <h3 class="text-lg font-black uppercase text-zinc-900 dark:text-white font-display mb-4">Historial de Ingresos</h3>
+        <p class="text-sm text-slate-500 dark:text-stone-400 leading-relaxed mb-6">
+          Esta gráfica muestra la evolución de los ingresos a través de los cierres de caja diarios realizados.
         </p>
+        <div class="w-full h-64 relative">
+          <canvas id="cierresChart"></canvas>
+        </div>
       </div>
       `;
+
+      // Inicializar Gráfica
+      const ctx = document.getElementById('cierresChart');
+      if (ctx && cierres.length > 0) {
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: cierres.map(c => new Date(c.fecha).toLocaleDateString()),
+            datasets: [{
+              label: 'Ingresos por Cierre ($)',
+              data: cierres.map(c => c.total_ingresos),
+              borderColor: '#e05c1a', // sport-500
+              backgroundColor: 'rgba(224, 92, 26, 0.2)',
+              borderWidth: 2,
+              fill: true,
+              tension: 0.3
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: { beginAtZero: true }
+            }
+          }
+        });
+      } else if (ctx) {
+        ctx.parentElement.innerHTML = '<p class="text-sm text-center text-slate-400 mt-10">No hay datos históricos de cierres todavía.</p>';
+      }
+
+      // Evento de Cerrar Día
+      document.getElementById('btn-cerrar-dia')?.addEventListener('click', async () => {
+        if (ordenesActivas.length === 0) {
+          alert("No hay órdenes nuevas para procesar en un cierre.");
+          return;
+        }
+        if (confirm("¿Estás seguro de que deseas realizar el cierre del día? Esto guardará los ingresos de las órdenes actuales e iniciará un nuevo ciclo de métricas para mañana.")) {
+          try {
+            await crearCierre();
+            alert("Cierre del día realizado con éxito.");
+            cargarPestaña();
+          } catch (error) {
+            alert(error.message);
+          }
+        }
+      });
     } 
     
     else if (pestañaActiva === "productos") {
