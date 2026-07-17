@@ -16,39 +16,21 @@ export async function obtenerOrdenesPorUsuario(userId) {
   return await response.json();
 }
 
-// Crea una orden y actualiza automáticamente el stock de los productos comprados
+// Crea una orden. El backend descuenta automáticamente el stock de cada producto
+// de forma atómica (transacción SQLite). Si no hay stock suficiente, lanza un error.
 export async function crearOrden(orden) {
-  // 1. Crear el registro de la orden
   const response = await fetch(API, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(orden),
   });
-  if (!response.ok) throw new Error("Error al procesar la orden");
-  const nuevaOrden = await response.json();
 
-  // 2. Descontar stock para cada producto
-  for (const item of orden.productos) {
-    try {
-      // Obtener el producto actual
-      const prodRes = await fetch(`${BASE_URL}/productos/${item.productoId}`);
-      if (prodRes.ok) {
-        const producto = await prodRes.json();
-        const nuevoStock = Math.max(0, producto.stock - item.cantidad);
-        
-        // Actualizar stock mediante PATCH
-        await fetch(`${BASE_URL}/productos/${item.productoId}`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ stock: nuevoStock })
-        });
-      }
-    } catch (err) {
-      console.error(`No se pudo actualizar el stock del producto ${item.productoId}:`, err);
-    }
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || "Error al procesar la orden");
   }
 
-  return nuevaOrden;
+  return await response.json();
 }
 
 // Actualiza el estado de una orden (Pendiente, En preparación, Enviado, Entregado, Cancelado)

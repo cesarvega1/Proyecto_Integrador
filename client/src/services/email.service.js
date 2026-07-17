@@ -1,23 +1,3 @@
-/**
- * email.service.js
- * Servicio de envío de correos de confirmación via EmailJS.
- *
- * CONFIGURACIÓN REQUERIDA:
- * 1. Crea una cuenta gratis en https://www.emailjs.com
- * 2. Ve a "Email Services" → Agrega Gmail u otro proveedor
- * 3. Ve a "Email Templates" → Crea una plantilla con estas variables:
- *      {{to_email}}       - Email del cliente
- *      {{to_name}}        - Nombre del cliente
- *      {{order_id}}       - ID del pedido
- *      {{order_date}}     - Fecha del pedido
- *      {{order_total}}    - Total de la compra
- *      {{payment_method}} - Método de pago
- *      {{shipping_address}} - Dirección de envío
- *      {{products_list}}  - Lista de productos
- *      {{store_name}}     - Nombre de la tienda
- * 4. Reemplaza los valores de abajo con los tuyos.
- * 5. En index.html reemplaza "TU_PUBLIC_KEY_AQUI" con tu Public Key.
- */
 
 const EMAILJS_SERVICE_ID = "service_lolzt1m";
 const EMAILJS_TEMPLATE_ID = "template_ji8m999";

@@ -269,11 +269,48 @@ app.get('/ordenes', async (req, res) => {
 app.post('/ordenes', async (req, res) => {
     try {
         const { userId, fecha, estado, total, productos } = req.body;
-        const result = await db.run(
-            'INSERT INTO ordenes (userId, fecha, estado, total, productos) VALUES (?, ?, ?, ?, ?)',
-            [userId, fecha, estado, total, JSON.stringify(productos || [])]
-        );
-        res.status(201).json({ id: result.lastID, ...req.body });
+
+        // Iniciar transacción para garantizar atomicidad
+        await db.run('BEGIN TRANSACTION');
+
+        try {
+            // 1. Verificar y descontar stock de cada producto
+            for (const item of (productos || [])) {
+                const producto = await db.get('SELECT stock FROM productos WHERE id = ?', [item.productoId]);
+
+                if (!producto) {
+                    await db.run('ROLLBACK');
+                    return res.status(404).json({ error: `Producto con id ${item.productoId} no encontrado.` });
+                }
+
+                if (producto.stock < item.cantidad) {
+                    await db.run('ROLLBACK');
+                    return res.status(400).json({
+                        error: `Stock insuficiente para el producto "${item.nombre}". Disponible: ${producto.stock}, solicitado: ${item.cantidad}.`
+                    });
+                }
+
+                // Descontar stock
+                await db.run(
+                    'UPDATE productos SET stock = stock - ? WHERE id = ?',
+                    [item.cantidad, item.productoId]
+                );
+            }
+
+            // 2. Crear el registro de la orden
+            const result = await db.run(
+                'INSERT INTO ordenes (userId, fecha, estado, total, productos) VALUES (?, ?, ?, ?, ?)',
+                [userId, fecha, estado, total, JSON.stringify(productos || [])]
+            );
+
+            await db.run('COMMIT');
+            res.status(201).json({ id: result.lastID, ...req.body });
+
+        } catch (innerError) {
+            await db.run('ROLLBACK');
+            throw innerError;
+        }
+
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

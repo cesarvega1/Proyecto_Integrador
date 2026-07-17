@@ -317,15 +317,15 @@ export function renderCheckout() {
 export function setupCheckout() {
   setupNavbar();
 
-  const form                 = document.getElementById("checkout-form");
-  const cardFields           = document.getElementById("card-fields");
+  const form = document.getElementById("checkout-form");
+  const cardFields = document.getElementById("card-fields");
   const transferInstructions = document.getElementById("transfer-instructions");
-  const errorBox             = document.getElementById("checkout-error");
-  const labelTarjeta         = document.getElementById("label-tarjeta");
-  const labelTransferencia   = document.getElementById("label-transferencia");
-  const submitBtn            = document.getElementById("submit-btn");
-  const submitText           = document.getElementById("submit-btn-text");
-  const submitSpinner        = document.getElementById("submit-spinner");
+  const errorBox = document.getElementById("checkout-error");
+  const labelTarjeta = document.getElementById("label-tarjeta");
+  const labelTransferencia = document.getElementById("label-transferencia");
+  const submitBtn = document.getElementById("submit-btn");
+  const submitText = document.getElementById("submit-btn-text");
+  const submitSpinner = document.getElementById("submit-spinner");
 
   if (!form) return;
 
@@ -382,42 +382,42 @@ export function setupCheckout() {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const usuario        = obtenerSesion();
-    const carrito        = obtenerCarrito();
-    const subtotal       = obtenerTotalCarrito();
+    const usuario = obtenerSesion();
+    const carrito = obtenerCarrito();
+    const subtotal = obtenerTotalCarrito();
     const descPorcentaje = parseInt(sessionStorage.getItem("descuentoPorcentaje") || "0");
-    const descuento      = subtotal * (descPorcentaje / 100);
-    const total          = subtotal - descuento;
+    const descuento = subtotal * (descPorcentaje / 100);
+    const total = subtotal - descuento;
 
-    const nombre   = document.getElementById("client-name").value.trim();
-    const email    = document.getElementById("client-email").value.trim();
-    const address  = document.getElementById("shipping-address").value.trim();
-    const city     = document.getElementById("shipping-city").value.trim();
-    const phone    = document.getElementById("shipping-phone").value.trim();
+    const nombre = document.getElementById("client-name").value.trim();
+    const email = document.getElementById("client-email").value.trim();
+    const address = document.getElementById("shipping-address").value.trim();
+    const city = document.getElementById("shipping-city").value.trim();
+    const phone = document.getElementById("shipping-phone").value.trim();
     const metodoVal = document.querySelector('input[name="payment-method"]:checked').value;
 
     const metodosMapeo = {
-      tarjeta:       "Tarjeta de Crédito",
+      tarjeta: "Tarjeta de Crédito",
       transferencia: "Transferencia Bancaria"
     };
 
     // Armar objeto de orden
     const orden = {
-      userId:          usuario.id,
-      fecha:           new Date().toISOString().split("T")[0],
-      productos:       carrito.map(item => ({
-        productoId:     item.id,
-        nombre:         item.nombre,
-        cantidad:       item.cantidad,
-        talla:          item.talla,
-        color:          item.color,
+      userId: usuario.id,
+      fecha: new Date().toISOString().split("T")[0],
+      productos: carrito.map(item => ({
+        productoId: item.id,
+        nombre: item.nombre,
+        cantidad: item.cantidad,
+        talla: item.talla,
+        color: item.color,
         precioUnitario: item.precio
       })),
       total,
-      estado:          "Confirmada",
-      direccionEnvio:  `${address}, ${city}`,
-      telefono:        phone,
-      metodoPago:      metodosMapeo[metodoVal]
+      estado: "Confirmada",
+      direccionEnvio: `${address}, ${city}`,
+      telefono: phone,
+      metodoPago: metodosMapeo[metodoVal]
     };
 
     // Mostrar spinner en el botón
@@ -433,10 +433,10 @@ export function setupCheckout() {
       sessionStorage.removeItem("descuentoPorcentaje");
 
       // 2️⃣ Llenar datos del modal de éxito
-      document.getElementById("modal-order-id").textContent  = `#${nuevaOrden.id ?? "---"}`;
-      document.getElementById("modal-total").textContent     = `$${total.toLocaleString()}`;
-      document.getElementById("modal-metodo").textContent    = metodosMapeo[metodoVal];
-      document.getElementById("modal-email").textContent     = email;
+      document.getElementById("modal-order-id").textContent = `#${nuevaOrden.id ?? "---"}`;
+      document.getElementById("modal-total").textContent = `$${total.toLocaleString()}`;
+      document.getElementById("modal-metodo").textContent = metodosMapeo[metodoVal];
+      document.getElementById("modal-email").textContent = email;
 
       // 3️⃣ Mostrar modal inmediatamente
       document.getElementById("success-modal").classList.remove("hidden");
@@ -446,18 +446,18 @@ export function setupCheckout() {
       try {
         await enviarCorreoConfirmacion({ ...nuevaOrden, ...orden }, email, nombre);
         emailStatusDiv.textContent = "✅ Correo de confirmación enviado exitosamente.";
-        emailStatusDiv.className   = "mt-4 rounded-xl px-4 py-2.5 text-xs font-semibold bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800";
+        emailStatusDiv.className = "mt-4 rounded-xl px-4 py-2.5 text-xs font-semibold bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800";
         emailStatusDiv.classList.remove("hidden");
       } catch (emailErr) {
         console.error("Error al enviar correo:", emailErr);
         emailStatusDiv.textContent = "⚠️ No se pudo enviar el correo. Revisa tu configuración de EmailJS.";
-        emailStatusDiv.className   = "mt-4 rounded-xl px-4 py-2.5 text-xs font-semibold bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800";
+        emailStatusDiv.className = "mt-4 rounded-xl px-4 py-2.5 text-xs font-semibold bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800";
         emailStatusDiv.classList.remove("hidden");
       }
 
     } catch (err) {
-      // Error al guardar la orden
-      errorBox.textContent = "⚠️ No se pudo procesar el pedido. Verifica que el servidor API esté activo.";
+      // Error al guardar la orden (ej: stock insuficiente)
+      errorBox.textContent = `⚠️ ${err.message || "No se pudo procesar el pedido. Verifica que el servidor API esté activo."}`;
       errorBox.classList.remove("hidden");
 
       // Restaurar botón
