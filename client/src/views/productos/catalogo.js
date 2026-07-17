@@ -44,7 +44,7 @@ export function renderCatalogo() {
               <input id="search-input" type="text" placeholder="Camiseta, zapatilla, balón..." 
                 value="${busquedaTexto}"
                 class="w-full rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800 pl-10 pr-4 py-2.5 text-sm text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-sport-500 transition-colors" />
-              <span class="absolute left-3.5 top-3 text-slate-400 text-sm">🔍</span>
+              <svg class="absolute left-3.5 top-3 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
           </div>
 
@@ -124,8 +124,8 @@ function renderGridHTML(productos) {
 
   if (productos.length === 0) {
     grid.innerHTML = `
-    <div class="col-span-full py-20 text-center text-slate-400">
-      <span class="text-5xl">🏋️</span>
+    <div class="col-span-full py-20 flex flex-col items-center justify-center text-center text-slate-400">
+      <svg class="w-16 h-16 text-slate-300 dark:text-stone-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
       <h3 class="text-lg font-black uppercase text-slate-800 dark:text-white mt-4 font-display">No se encontraron productos</h3>
       <p class="text-sm text-zinc-500 mt-2">Prueba modificando tus filtros o ingresando otro término de búsqueda.</p>
     </div>
@@ -143,8 +143,9 @@ function renderGridHTML(productos) {
         <img src="${p.imagen}" alt="${p.nombre}" 
              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-          <a href="/producto/${p.id}" data-link class="w-full text-center rounded-xl bg-white/90 dark:bg-zinc-950/90 py-2.5 text-xs font-bold text-slate-800 dark:text-white shadow-sm backdrop-blur-sm">
-            🔎 Ver detalles
+          <a href="/producto/${p.id}" data-link class="w-full text-center rounded-xl bg-white/90 dark:bg-zinc-950/90 py-2.5 text-xs font-bold text-slate-800 dark:text-white shadow-sm backdrop-blur-sm flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+            Ver detalles
           </a>
         </div>
         ${sinStock 
@@ -175,8 +176,10 @@ function renderGridHTML(productos) {
           <!-- Botón agregar rápido -->
           ${sinStock 
             ? `<button disabled class="rounded-xl bg-zinc-200 dark:bg-zinc-800 px-3.5 py-2.5 text-xs font-bold text-slate-400 cursor-not-allowed">Sin stock</button>`
-            : `<button class="quick-add-btn rounded-xl bg-sport-500 hover:bg-sport-600 text-white p-2.5 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm shadow-sport-500/20" 
-                 data-id="${p.id}" aria-label="Agregar al carrito">🛒 +</button>`
+            : `<button class="quick-add-btn rounded-xl bg-sport-500 hover:bg-sport-600 text-white p-2.5 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm shadow-sport-500/20 flex items-center justify-center w-9 h-9" 
+                 data-id="${p.id}" aria-label="Agregar al carrito">
+                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+               </button>`
           }
         </div>
       </div>
@@ -197,11 +200,11 @@ function renderGridHTML(productos) {
         agregarAlCarrito(p, tallaDef, colorDef, 1);
         
         // Efecto visual de agregado
-        btn.textContent = "✓";
+        btn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>`;
         btn.classList.remove("bg-sport-500");
         btn.classList.add("bg-green-600");
         setTimeout(() => {
-          btn.textContent = "🛒 +";
+          btn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>`;
           btn.classList.remove("bg-green-600");
           btn.classList.add("bg-sport-500");
         }, 1200);
@@ -307,8 +310,8 @@ export async function setupCatalogo() {
     const grid = document.getElementById("product-grid");
     if (grid) {
       grid.innerHTML = `
-      <div class="col-span-full py-20 text-center text-red-500">
-        <span class="text-5xl">⚠️</span>
+      <div class="col-span-full py-20 flex flex-col items-center justify-center text-center text-red-500">
+        <svg class="w-16 h-16 text-red-400 dark:text-red-800" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
         <h3 class="text-lg font-black uppercase mt-4 font-display">Error al conectar con la tienda</h3>
         <p class="text-sm text-zinc-500 mt-2">Por favor, valida que el servidor API se encuentre en ejecución.</p>
       </div>

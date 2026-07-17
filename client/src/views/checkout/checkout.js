@@ -35,12 +35,14 @@ export function renderCheckout() {
       <div class="h-2 bg-gradient-to-r from-sport-500 to-sport-600"></div>
 
       <div class="p-8 text-center">
-        <!-- Ícono animado -->
-        <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30 text-5xl animate-bounce">
-          ✅
+        <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30 text-green-600">
+          <svg class="w-10 h-10 animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
         </div>
 
-        <span class="text-xs font-bold uppercase tracking-widest text-sport-500">SportZone ⚡</span>
+        <span class="text-xs font-bold uppercase tracking-widest text-sport-500 flex items-center justify-center gap-1">
+          SportZone
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        </span>
         <h2 class="text-2xl font-black uppercase text-zinc-900 dark:text-white font-display mt-2">
           ¡Compra Exitosa!
         </h2>
@@ -73,12 +75,14 @@ export function renderCheckout() {
 
         <div class="mt-6 grid grid-cols-2 gap-3">
           <button id="modal-dashboard-btn"
-            class="rounded-xl border border-zinc-300 dark:border-zinc-700 px-4 py-3 text-xs font-bold text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all cursor-pointer">
-            📦 Mis Pedidos
+            class="rounded-xl border border-zinc-300 dark:border-zinc-700 px-4 py-3 text-xs font-bold text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all cursor-pointer flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+            Mis Pedidos
           </button>
           <button id="modal-continue-btn"
-            class="rounded-xl bg-sport-500 hover:bg-sport-600 px-4 py-3 text-xs font-bold text-white transition-all hover:scale-[1.02] cursor-pointer">
-            ⚡ Seguir Comprando
+            class="rounded-xl bg-sport-500 hover:bg-sport-600 px-4 py-3 text-xs font-bold text-white transition-all hover:scale-[1.02] cursor-pointer flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            Seguir Comprando
           </button>
         </div>
       </div>
@@ -124,7 +128,10 @@ export function renderCheckout() {
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-stone-400 mb-2" for="client-email">Correo Electrónico</label>
                     <input id="client-email" type="email" value="${usuario?.email || ""}" placeholder="tucorreo@ejemplo.com" required
                       class="w-full rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800 px-4 py-3 text-sm text-slate-800 dark:text-white focus:outline-none focus:border-sport-500 transition-colors" />
-                    <p class="text-[10px] text-slate-400 mt-1">📧 Aquí recibirás la confirmación de tu compra</p>
+                    <p class="text-[10px] text-slate-400 mt-1 flex items-center gap-1">
+                      <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                      Aquí recibirás la confirmación de tu compra
+                    </p>
                   </div>
                 </div>
 
@@ -161,7 +168,10 @@ export function renderCheckout() {
                 <label id="label-tarjeta" class="flex items-center gap-3 p-4 rounded-2xl border-2 border-sport-500 bg-sport-50 dark:bg-sport-950/10 cursor-pointer transition-all">
                   <input type="radio" name="payment-method" value="tarjeta" checked class="accent-sport-500" />
                   <div>
-                    <span class="block text-xs font-black text-zinc-800 dark:text-stone-200">💳 Tarjeta de Crédito</span>
+                    <span class="text-xs font-black text-zinc-800 dark:text-stone-200 flex items-center gap-1">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                      Tarjeta de Crédito
+                    </span>
                     <span class="text-[10px] text-slate-400">Visa · Mastercard · Amex</span>
                   </div>
                 </label>
@@ -170,7 +180,10 @@ export function renderCheckout() {
                 <label id="label-transferencia" class="flex items-center gap-3 p-4 rounded-2xl border-2 border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 cursor-pointer hover:border-sport-500 transition-all">
                   <input type="radio" name="payment-method" value="transferencia" class="accent-sport-500" />
                   <div>
-                    <span class="block text-xs font-black text-zinc-800 dark:text-stone-200">🏦 Transferencia Bancaria</span>
+                    <span class="text-xs font-black text-zinc-800 dark:text-stone-200 flex items-center gap-1">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path></svg>
+                      Transferencia Bancaria
+                    </span>
                     <span class="text-[10px] text-slate-400">Verificación 24h</span>
                   </div>
                 </label>
@@ -180,8 +193,8 @@ export function renderCheckout() {
               <div id="card-fields" class="grid gap-4 p-5 bg-zinc-50 dark:bg-zinc-950 rounded-2xl border border-zinc-200 dark:border-zinc-800">
                 <div class="flex items-center gap-2 mb-1">
                   <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Datos de Tarjeta</span>
-                  <div class="flex gap-1 ml-auto">
-                    <span class="text-lg">💳</span>
+                  <div class="flex gap-1 ml-auto text-slate-400">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                   </div>
                 </div>
                 <div>
@@ -204,9 +217,11 @@ export function renderCheckout() {
                 </div>
               </div>
 
-              <!-- Instrucciones Transferencia -->
               <div id="transfer-instructions" class="hidden p-5 bg-zinc-50 dark:bg-zinc-950 rounded-2xl border border-zinc-200 dark:border-zinc-800">
-                <span class="block font-black text-xs uppercase tracking-wider text-sport-500 mb-3">📋 Instrucciones de Pago:</span>
+                <span class="flex items-center gap-2 font-black text-xs uppercase tracking-wider text-sport-500 mb-3">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                  Instrucciones de Pago:
+                </span>
                 <div class="text-xs text-slate-600 dark:text-stone-300 leading-relaxed space-y-2">
                   <div class="flex items-start gap-2">
                     <span class="text-sport-500 font-bold shrink-0">①</span>
@@ -228,14 +243,18 @@ export function renderCheckout() {
             <div class="pt-2">
               <button id="submit-btn" type="submit"
                 class="w-full rounded-2xl bg-sport-500 hover:bg-sport-600 py-4 text-sm font-black uppercase text-white shadow-lg shadow-sport-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer text-center tracking-wide flex items-center justify-center gap-2">
-                <span id="submit-btn-text">⚡ Confirmar Pedido — $${total.toLocaleString()}</span>
+                <span id="submit-btn-text" class="flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                  Confirmar Pedido — $${total.toLocaleString()}
+                </span>
                 <svg id="submit-spinner" class="hidden animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                   <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
                 </svg>
               </button>
-              <p class="text-center text-[10px] text-slate-400 mt-3">
-                🔒 Transacción segura · Datos encriptados SSL
+              <p class="flex items-center justify-center gap-1 text-[10px] text-slate-400 mt-3">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                Transacción segura · Datos encriptados SSL
               </p>
             </div>
 
@@ -246,8 +265,9 @@ export function renderCheckout() {
              Resumen de Pedido (sidebar)
         ══════════════════════════════════════ -->
         <div class="rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-7 shadow-sm sticky top-24">
-          <h3 class="text-base font-black uppercase text-zinc-900 dark:text-white font-display mb-5 pb-4 border-b border-zinc-200 dark:border-zinc-800">
-            🛒 Resumen
+          <h3 class="text-base font-black uppercase text-zinc-900 dark:text-white font-display mb-5 pb-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            Resumen
           </h3>
 
           <!-- Lista de items -->
@@ -295,11 +315,16 @@ export function renderCheckout() {
             </div>
           </div>
 
-          <!-- Badges de seguridad -->
           <div class="mt-6 pt-4 border-t border-zinc-200 dark:border-zinc-800 flex flex-wrap gap-2">
-            <span class="text-[10px] font-semibold text-zinc-400 flex items-center gap-1">🔒 SSL</span>
-            <span class="text-[10px] font-semibold text-zinc-400 flex items-center gap-1">📦 Envío gratis</span>
-            <span class="text-[10px] font-semibold text-zinc-400 flex items-center gap-1">↩️ 30 días devolución</span>
+            <span class="text-[10px] font-semibold text-zinc-400 flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg> SSL
+            </span>
+            <span class="text-[10px] font-semibold text-zinc-400 flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg> Envío gratis
+            </span>
+            <span class="text-[10px] font-semibold text-zinc-400 flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path></svg> 30 días devolución
+            </span>
           </div>
         </div>
 
@@ -445,23 +470,23 @@ export function setupCheckout() {
       const emailStatusDiv = document.getElementById("modal-email-status");
       try {
         await enviarCorreoConfirmacion({ ...nuevaOrden, ...orden }, email, nombre);
-        emailStatusDiv.textContent = "✅ Correo de confirmación enviado exitosamente.";
+        emailStatusDiv.innerHTML = `<span class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg> Correo de confirmación enviado exitosamente.</span>`;
         emailStatusDiv.className = "mt-4 rounded-xl px-4 py-2.5 text-xs font-semibold bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800";
         emailStatusDiv.classList.remove("hidden");
       } catch (emailErr) {
         console.error("Error al enviar correo:", emailErr);
-        emailStatusDiv.textContent = "⚠️ No se pudo enviar el correo. Revisa tu configuración de EmailJS.";
+        emailStatusDiv.innerHTML = `<span class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg> No se pudo enviar el correo. Revisa tu configuración de EmailJS.</span>`;
         emailStatusDiv.className = "mt-4 rounded-xl px-4 py-2.5 text-xs font-semibold bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800";
         emailStatusDiv.classList.remove("hidden");
       }
 
     } catch (err) {
       // Error al guardar la orden (ej: stock insuficiente)
-      errorBox.textContent = `⚠️ ${err.message || "No se pudo procesar el pedido. Verifica que el servidor API esté activo."}`;
+      errorBox.innerHTML = `<span class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg> ${err.message || "No se pudo procesar el pedido. Verifica que el servidor API esté activo."}</span>`;
       errorBox.classList.remove("hidden");
 
       // Restaurar botón
-      submitText.textContent = `⚡ Confirmar Pedido — $${total.toLocaleString()}`;
+      submitText.innerHTML = `<span class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg> Confirmar Pedido — $${total.toLocaleString()}</span>`;
       submitBtn.disabled = false;
       submitSpinner.classList.add("hidden");
     }

@@ -27,7 +27,7 @@ export async function enviarCorreoConfirmacion(orden, email, nombre) {
     payment_method: orden.metodoPago,
     shipping_address: orden.direccionEnvio,
     products_list: productosList,
-    store_name: "SportZone ⚡"
+    store_name: "SportZone"
   };
 
   // Verificar que la librería EmailJS esté disponible
@@ -58,7 +58,7 @@ export async function enviarCorreoConfirmacion(orden, email, nombre) {
       templateParams
     );
 
-    console.log("✅ Correo enviado", response);
+    console.log("Correo enviado", response);
   } catch (error) {
     console.error(error);
     console.log(error.status);

@@ -133,8 +133,9 @@ export async function setupDetalle(params) {
           <div class="mt-10 pt-6 border-t border-zinc-200 dark:border-zinc-800">
             ${sinStock 
               ? `<button disabled class="w-full rounded-xl bg-zinc-200 dark:bg-zinc-800 py-4 text-sm font-bold text-zinc-500 dark:text-stone-500 cursor-not-allowed text-center">Agotado Temporalmente</button>`
-              : `<button id="add-to-cart-btn" class="w-full rounded-xl bg-sport-500 hover:bg-sport-600 py-4 text-sm font-bold text-white shadow-lg shadow-sport-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer text-center">
-                  🛒 Añadir al carrito
+              : `<button id="add-to-cart-btn" class="w-full rounded-xl bg-sport-500 hover:bg-sport-600 py-4 text-sm font-bold text-white shadow-lg shadow-sport-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer text-center flex items-center justify-center gap-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                  Añadir al carrito
                  </button>`
             }
           </div>
@@ -186,7 +187,7 @@ export async function setupDetalle(params) {
         agregarAlCarrito(producto, tallaSeleccionada, colorSeleccionado, cantidadSeleccionada);
         
         // Micro-animación de éxito
-        btnAdd.textContent = "✓ ¡Añadido con éxito!";
+        btnAdd.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg> ¡Añadido con éxito!`;
         btnAdd.classList.remove("bg-sport-500");
         btnAdd.classList.add("bg-green-600");
         
@@ -200,8 +201,8 @@ export async function setupDetalle(params) {
 
   } catch (err) {
     container.innerHTML = `
-    <div class="py-20 text-center text-red-500">
-      <span class="text-5xl">⚠️</span>
+    <div class="py-20 flex flex-col items-center justify-center text-center text-red-500">
+      <svg class="w-16 h-16 text-red-400 dark:text-red-800" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
       <h3 class="text-lg font-black uppercase mt-4 font-display">Producto no encontrado</h3>
       <p class="text-sm text-zinc-500 mt-2">El ID especificado no corresponde a ningún producto en nuestro catálogo.</p>
     </div>

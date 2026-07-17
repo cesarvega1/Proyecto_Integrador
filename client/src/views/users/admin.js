@@ -174,8 +174,9 @@ async function cargarPestaña() {
       tabContent.innerHTML = `
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-xl font-black uppercase text-zinc-900 dark:text-white font-display">Inventario Deportivo</h2>
-        <button id="add-product-btn" class="rounded-full bg-sport-500 hover:bg-sport-600 px-5 py-2 text-xs font-bold text-white transition-all cursor-pointer">
-          ⚡ Registrar Producto
+        <button id="add-product-btn" class="rounded-full bg-sport-500 hover:bg-sport-600 px-5 py-2 text-xs font-bold text-white transition-all cursor-pointer flex items-center justify-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          Registrar Producto
         </button>
       </div>
 
@@ -380,8 +381,8 @@ async function cargarPestaña() {
 
   } catch (err) {
     tabContent.innerHTML = `
-    <div class="py-12 text-center text-red-500 bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-3xl">
-      <span class="text-5xl">⚠️</span>
+    <div class="py-12 flex flex-col items-center justify-center text-red-500 bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-3xl">
+      <svg class="w-16 h-16 text-red-400 dark:text-red-800" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
       <h3 class="text-lg font-bold mt-4 font-serif">Error de carga</h3>
       <p class="text-sm text-stone-500 mt-2">No se pudo recuperar la información del servidor API.</p>
     </div>

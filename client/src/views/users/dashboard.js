@@ -28,17 +28,23 @@ export function renderDashboard() {
       <!-- Tarjetas de Métricas -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         <div class="bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-2xl p-6 shadow-sm">
-          <span class="text-2xl">📦</span>
+          <div class="mb-4 text-slate-400 dark:text-stone-600">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+          </div>
           <h3 class="text-xs font-bold uppercase tracking-wider text-slate-450 dark:text-stone-400 mt-4">Total Pedidos</h3>
           <p id="stat-orders-count" class="text-3xl font-extrabold text-burgundy-850 dark:text-rosegold-400 font-serif mt-2">0</p>
         </div>
         <div class="bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-2xl p-6 shadow-sm">
-          <span class="text-2xl">💳</span>
+          <div class="mb-4 text-slate-400 dark:text-stone-600">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+          </div>
           <h3 class="text-xs font-bold uppercase tracking-wider text-slate-450 dark:text-stone-400 mt-4">Monto Invertido</h3>
           <p id="stat-total-spent" class="text-3xl font-extrabold text-burgundy-850 dark:text-rosegold-400 font-serif mt-2">$0</p>
         </div>
         <div class="bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-2xl p-6 shadow-sm">
-          <span class="text-2xl">🪡</span>
+          <div class="mb-4 text-slate-400 dark:text-stone-600">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
           <h3 class="text-xs font-bold uppercase tracking-wider text-slate-450 dark:text-stone-400 mt-4">Estado del SportZone</h3>
           <p class="text-sm font-semibold text-green-600 mt-3 flex items-center gap-1.5">
             <span class="h-2.5 w-2.5 rounded-full bg-green-500 inline-block animate-pulse"></span> Activo y Recibiendo Pedidos
@@ -90,7 +96,9 @@ export async function setupDashboard() {
     if (ordenes.length === 0) {
       listContainer.innerHTML = `
       <div class="py-12 text-center text-slate-400 bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-3xl">
-        <span class="text-5xl">👔</span>
+        <div class="flex justify-center mb-4 text-slate-300 dark:text-stone-700">
+          <svg class="w-16 h-16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+        </div>
         <h3 class="text-lg font-bold text-slate-800 dark:text-white mt-4 font-serif">No tienes pedidos registrados</h3>
         <p class="text-sm text-stone-500 mt-2">Visita nuestra colección y realiza tu primer pedido de modistería a medida.</p>
         <div class="mt-6">
@@ -132,7 +140,9 @@ export async function setupDashboard() {
             return `
             <div class="flex items-center justify-between text-sm">
               <div class="flex items-center gap-2">
-                <span class="text-lg">👚</span>
+                <div class="text-slate-400 dark:text-stone-600">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                </div>
                 <div>
                   <span class="font-bold text-slate-800 dark:text-white">${p.nombre}</span>
                   <span class="block text-[10px] text-slate-400">Talla: ${p.talla} | Color: ${p.color} | Cantidad: ${p.cantidad}</span>
@@ -163,7 +173,9 @@ export async function setupDashboard() {
   } catch (err) {
     listContainer.innerHTML = `
     <div class="py-12 text-center text-red-500 bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-3xl">
-      <span class="text-5xl">⚠️</span>
+      <div class="flex justify-center mb-4 text-red-400 dark:text-red-800">
+        <svg class="w-16 h-16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+      </div>
       <h3 class="text-lg font-bold mt-4 font-serif">Error al consultar pedidos</h3>
       <p class="text-sm text-stone-500 mt-2">Por favor, valida que el servidor API se encuentre en ejecución.</p>
     </div>

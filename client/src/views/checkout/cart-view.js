@@ -20,12 +20,14 @@ export function renderCart() {
   if (carrito.length === 0) {
     contenidoHtml = `
     <div class="py-24 text-center text-slate-400 bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-3xl shadow-sm">
-      <span class="text-7xl">🧺</span>
+      <div class="flex justify-center mb-6">
+        <svg class="w-20 h-20 text-slate-300 dark:text-stone-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+      </div>
       <h2 class="text-2xl font-bold text-slate-800 dark:text-white mt-6 font-serif">Tu bolsa de compras está vacía</h2>
       <p class="text-sm text-stone-500 mt-2">¿Aún no has seleccionado tus prendas a medida? Explora nuestro catálogo.</p>
       <div class="mt-8">
-        <a class="rounded-full bg-burgundy-850 hover:bg-burgundy-600 px-8 py-3.5 text-sm font-bold text-white transition-all shadow-md inline-block" 
-           href="/productos" data-link>Ver Nueva Colección</a>
+        <a class="rounded-full bg-burgundy-850 hover:bg-burgundy-600 px-8 py-3.5 text-sm font-bold text-white transition-all shadow-md flex items-center justify-center gap-2 mx-auto w-fit" 
+           href="/productos" data-link>Ver Nueva Colección <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></a>
       </div>
     </div>
     `;
@@ -70,7 +72,7 @@ export function renderCart() {
               <!-- Eliminar -->
               <button class="cart-remove-btn text-xs font-bold text-red-500 hover:text-red-700 transition-colors flex items-center gap-1 cursor-pointer"
                 data-id="${item.id}" data-talla="${item.talla}" data-color="${item.color}">
-                🗑️ Eliminar
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg> Eliminar
               </button>
 
             </div>
@@ -125,8 +127,8 @@ export function renderCart() {
 
         <!-- Botón Checkout -->
         <div class="mt-8">
-          <button id="checkout-proceed-btn" class="w-full rounded-xl bg-burgundy-850 hover:bg-burgundy-600 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer text-center">
-            ${usuario ? "Proceder al Checkout ➔" : "Iniciar Sesión para Comprar ➔"}
+          <button id="checkout-proceed-btn" class="w-full rounded-xl bg-burgundy-850 hover:bg-burgundy-600 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer text-center flex items-center justify-center gap-2">
+            ${usuario ? "Proceder al Checkout <svg class=\"w-4 h-4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M17 8l4 4m0 0l-4 4m4-4H3\"></path></svg>" : "Iniciar Sesión para Comprar <svg class=\"w-4 h-4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M17 8l4 4m0 0l-4 4m4-4H3\"></path></svg>"}
           </button>
         </div>
 
