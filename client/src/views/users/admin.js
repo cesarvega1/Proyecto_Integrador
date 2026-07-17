@@ -28,19 +28,19 @@ export function renderAdmin() {
       <div class="flex flex-wrap border-b border-zinc-200 dark:border-zinc-800 gap-4 mb-8">
         <button class="tab-btn px-5 py-3 text-sm font-bold border-b-2 transition-all cursor-pointer ${
           pestañaActiva === "kpis" ? "border-sport-500 text-sport-500" : "border-transparent text-slate-500 dark:text-stone-400 hover:text-slate-800"
-        }" data-tab="kpis">📊 Métricas</button>
+        }" data-tab="kpis"> Métricas</button>
         
         <button class="tab-btn px-5 py-3 text-sm font-bold border-b-2 transition-all cursor-pointer ${
           pestañaActiva === "productos" ? "border-sport-500 text-sport-500" : "border-transparent text-slate-500 dark:text-stone-400 hover:text-slate-800"
-        }" data-tab="productos">🏋️ Inventario</button>
+        }" data-tab="productos"> Inventario</button>
         
         <button class="tab-btn px-5 py-3 text-sm font-bold border-b-2 transition-all cursor-pointer ${
           pestañaActiva === "ordenes" ? "border-sport-500 text-sport-500" : "border-transparent text-slate-500 dark:text-stone-400 hover:text-slate-800"
-        }" data-tab="ordenes">📦 Pedidos</button>
+        }" data-tab="ordenes"> Pedidos</button>
         
         <button class="tab-btn px-5 py-3 text-sm font-bold border-b-2 transition-all cursor-pointer ${
           pestañaActiva === "usuarios" ? "border-sport-500 text-sport-500" : "border-transparent text-slate-500 dark:text-stone-400 hover:text-slate-800"
-        }" data-tab="usuarios">👥 Cuentas</button>
+        }" data-tab="usuarios"> Cuentas</button>
       </div>
 
       <!-- Contenido de Pestaña -->
@@ -74,34 +74,36 @@ async function cargarPestaña() {
       // Métricas clave (solo órdenes no cerradas para el día actual)
       const ordenesActivas = ordenes.filter(o => o.cerrada !== 1);
       const totalVentas = ordenesActivas.reduce((acc, o) => acc + o.total, 0);
-      const prendasStock = productos.reduce((acc, p) => acc + p.stock, 0);
+      const prendasStock = productos.reduce((acc, p) => acc + Number(p.precio), 0);
+
+   
 
       tabContent.innerHTML = `
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-xl font-black uppercase text-zinc-900 dark:text-white font-display">Resumen del Día</h2>
         <button id="btn-cerrar-dia" class="rounded-full bg-red-500 hover:bg-red-600 px-5 py-2 text-xs font-bold text-white transition-all cursor-pointer shadow-md">
-          🛑 Cerrar Día
+           Cerrar Día
         </button>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
         <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
-          <span class="text-2xl">💰</span>
+          <span class="text-2xl"></span>
           <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-stone-400 mt-4">Ventas Brutas (Hoy)</h3>
           <p class="text-3xl font-extrabold text-sport-500 dark:text-sport-400 font-display mt-2">$${totalVentas.toLocaleString()}</p>
         </div>
         <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
-          <span class="text-2xl">📦</span>
+          <span class="text-2xl"></span>
           <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-stone-400 mt-4">Pedidos (Hoy)</h3>
           <p class="text-3xl font-extrabold text-sport-500 dark:text-sport-400 font-display mt-2">${ordenesActivas.length}</p>
         </div>
         <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
-          <span class="text-2xl">🏋️</span>
+          <span class="text-2xl"></span>
           <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-stone-400 mt-4">Stock en Inventario</h3>
-          <p class="text-3xl font-extrabold text-sport-500 dark:text-sport-400 font-display mt-2">${prendasStock} uds.</p>
+          <p class="text-3xl font-extrabold text-sport-500 dark:text-sport-400 font-display mt-2">${prendasStock} COL.</p>
         </div>
         <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
-          <span class="text-2xl">👤</span>
+          <span class="text-2xl"></span>
           <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-stone-400 mt-4">Clientes Registrados</h3>
           <p class="text-3xl font-extrabold text-sport-500 dark:text-sport-400 font-display mt-2">${usuarios.length}</p>
         </div>

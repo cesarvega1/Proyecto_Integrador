@@ -24,7 +24,7 @@ export function renderFooter() {
         <ul class="flex flex-col gap-2.5 text-sm text-slate-600 dark:text-stone-400">
           <li>📍 Local Esthercita Riwi</li>
           <li>📞 +57 310 258 7880</li>
-          <li>✉️ info@sportzone.com.co</li>
+          
         </ul>
       </div>
     </div>

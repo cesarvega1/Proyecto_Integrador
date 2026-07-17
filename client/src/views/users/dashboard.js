@@ -39,7 +39,7 @@ export function renderDashboard() {
         </div>
         <div class="bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-2xl p-6 shadow-sm">
           <span class="text-2xl">🪡</span>
-          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-450 dark:text-stone-400 mt-4">Estado del Atelier</h3>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-450 dark:text-stone-400 mt-4">Estado del SportZone</h3>
           <p class="text-sm font-semibold text-green-600 mt-3 flex items-center gap-1.5">
             <span class="h-2.5 w-2.5 rounded-full bg-green-500 inline-block animate-pulse"></span> Activo y Recibiendo Pedidos
           </p>

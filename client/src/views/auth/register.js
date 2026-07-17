@@ -6,12 +6,12 @@ export function renderRegister() {
   <main class="flex min-h-screen items-center justify-center bg-stone-100 dark:bg-stone-950 px-4 py-16 transition-colors">
     <div class="w-full max-w-lg rounded-3xl bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 p-8 shadow-xl">
       <div class="flex items-center justify-between mb-8">
-        <a class="text-xl font-bold text-burgundy-850 dark:text-rosegold-400 font-serif" href="/" data-link>🧵 Atelier</a>
+        <a class="text-xl font-bold text-burgundy-850 dark:text-rosegold-400 font-serif" href="/" data-link> SportZone</a>
         <a class="rounded-full border border-stone-300 dark:border-stone-700 px-4 py-1.5 text-xs font-semibold text-slate-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors" href="/login" data-link>Iniciar Sesión</a>
       </div>
 
       <span class="inline-block text-xs font-bold uppercase tracking-widest text-rosegold-500 mb-2">Creación de cuenta</span>
-      <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2 font-serif">Únete al Atelier</h1>
+      <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2 font-serif">Únete al SportZone</h1>
       <p class="text-slate-500 dark:text-stone-400 text-sm mb-6">Disfruta de pedidos personalizados, historial de órdenes y acceso preferente a colecciones.</p>
 
       <div id="register-error" class="hidden mb-4 rounded-2xl bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/50 px-4 py-3 text-sm text-red-650 dark:text-red-400"></div>
@@ -20,18 +20,18 @@ export function renderRegister() {
         <div class="grid grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-stone-400 mb-2" for="name">Nombre</label>
-            <input id="name" type="text" placeholder="Juan" required
+            <input id="name" type="text" placeholder="Tu nombre" required
               class="w-full rounded-xl bg-white dark:bg-stone-950 border border-stone-300 dark:border-stone-800 px-4 py-3 text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-rosegold-500 text-sm" />
           </div>
           <div>
             <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-stone-400 mb-2" for="lastName">Apellido</label>
-            <input id="lastName" type="text" placeholder="Pérez" required
+            <input id="lastName" type="text" placeholder="Tu apellido" required
               class="w-full rounded-xl bg-white dark:bg-stone-950 border border-stone-300 dark:border-stone-800 px-4 py-3 text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-rosegold-500 text-sm" />
           </div>
         </div>
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-stone-400 mb-2" for="email">Correo Electrónico</label>
-          <input id="email" type="email" placeholder="juan.perez@correo.com" required
+          <input id="email" type="email" placeholder="correo@gmail.com" required
             class="w-full rounded-xl bg-white dark:bg-stone-950 border border-stone-300 dark:border-stone-800 px-4 py-3 text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-rosegold-500 text-sm" />
         </div>
         <div>

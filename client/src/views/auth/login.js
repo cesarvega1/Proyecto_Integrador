@@ -6,7 +6,7 @@ export function renderLogin() {
   <main class="flex min-h-screen items-center justify-center bg-stone-100 dark:bg-stone-950 px-4 py-16 transition-colors">
     <div class="w-full max-w-md rounded-3xl bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 p-8 shadow-xl">
       <div class="flex items-center justify-between mb-8">
-        <a class="text-xl font-bold text-burgundy-850 dark:text-rosegold-400 font-serif" href="/" data-link>🧵 Atelier</a>
+        <a class="text-xl font-bold text-burgundy-850 dark:text-rosegold-400 font-serif" href="/" data-link>SportZone</a>
         <a class="rounded-full border border-stone-300 dark:border-stone-700 px-4 py-1.5 text-xs font-semibold text-slate-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors" href="/register" data-link>Registrarse</a>
       </div>
       
@@ -28,7 +28,7 @@ export function renderLogin() {
             class="w-full rounded-xl bg-white dark:bg-stone-950 border border-stone-300 dark:border-stone-800 px-4 py-3 text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-rosegold-500 transition-colors text-sm" />
         </div>
         <button type="submit" class="w-full rounded-xl bg-burgundy-850 px-5 py-3.5 text-sm font-bold text-white hover:bg-burgundy-600 shadow-md transition-all hover:scale-[1.02] active:scale-[0.98]" style="cursor: pointer;">
-          Entrar al Atelier
+          Entrar al SportZone
         </button>
       </form>
       

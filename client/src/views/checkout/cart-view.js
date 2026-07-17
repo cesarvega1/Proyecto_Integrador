@@ -143,7 +143,7 @@ export function renderCart() {
     <div class="mx-auto max-w-5xl px-6">
       
       <div class="mb-12">
-        <h1 class="text-4xl font-bold text-burgundy-850 dark:text-rosegold-400 font-serif">Carrito del Atelier</h1>
+        <h1 class="text-4xl font-bold text-burgundy-850 dark:text-rosegold-400 font-serif">Carrito del SportZone</h1>
         <div class="borde-hilado text-transparent h-px mt-4 w-24"></div>
       </div>
 
@@ -227,7 +227,7 @@ function vincularEventosCarrito() {
 
     if (cod === "ATELIER10") {
       descuentoPorcentaje = 10;
-      mensajeCupon = "✓ Cupón aplicado. Descuento del 10% activado.";
+      mensajeCupon = " Cupón aplicado. Descuento del 10% activado.";
     } else if (cod === "") {
       descuentoPorcentaje = 0;
       mensajeCupon = "";

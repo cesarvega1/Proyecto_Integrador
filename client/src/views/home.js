@@ -44,22 +44,22 @@ export function renderHome() {
           `}
         </div>
 
-        <!-- Stats rápidos -->
-        <div class="mt-16 flex flex-wrap gap-10">
-          <div>
-            <p class="text-3xl font-black text-sport-400 font-display">+200</p>
-            <p class="text-xs text-zinc-400 uppercase tracking-wider mt-1">Productos</p>
-          </div>
-          <div>
-            <p class="text-3xl font-black text-sport-400 font-display">+5K</p>
-            <p class="text-xs text-zinc-400 uppercase tracking-wider mt-1">Clientes</p>
-          </div>
-          <div>
-            <p class="text-3xl font-black text-sport-400 font-display">24h</p>
-            <p class="text-xs text-zinc-400 uppercase tracking-wider mt-1">Envío Express</p>
+          <!-- Stats rápidos -->
+          <div class="mt-16 flex flex-wrap gap-10">
+            <div>
+              <p class="text-3xl font-black text-sport-400 font-display"></p>
+              <p class="text-xs text-zinc-400 uppercase tracking-wider mt-1"></p>
+            </div>
+            <div>
+              <p class="text-3xl font-black text-sport-400 font-display"></p>
+              <p class="text-xs text-zinc-400 uppercase tracking-wider mt-1"></p>
+            </div>
+            <div>
+              <p class="text-3xl font-black text-sport-400 font-display"></p>
+              <p class="text-xs text-zinc-400 uppercase tracking-wider mt-1"></p>
+            </div>
           </div>
         </div>
-      </div>
       
       <!-- Mitad Imagen -->
       <div class="flex-1 w-full lg:w-1/2 h-[60vh] lg:h-[85vh] relative">
@@ -109,7 +109,7 @@ export function renderHome() {
         <!-- Balones -->
         <a href="/productos?categoria=Balones" data-link class="group relative h-64 rounded-2xl overflow-hidden flex flex-col justify-end p-5 border border-zinc-200 dark:border-zinc-800 hover:border-sport-500 shadow-sm transition-all hover:-translate-y-1">
           <div class="absolute inset-0 bg-zinc-900/50 group-hover:bg-zinc-900/70 transition-colors z-10"></div>
-          <img src="https://images.unsplash.com/photo-1614632537190-23e4e1f8e938?w=300&auto=format&fit=crop&q=80" 
+          <img src="https://http2.mlstatic.com/D_Q_NP_824478-CBT102655641608_122025-O.webp" 
                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Balones" />
           <h3 class="relative z-20 text-base font-black text-white font-display uppercase">Balones</h3>
           <p class="relative z-20 text-xs text-zinc-300 mt-0.5">Ver productos ➔</p>
@@ -127,7 +127,7 @@ export function renderHome() {
         <!-- Chaquetas -->
         <a href="/productos?categoria=Chaquetas" data-link class="group relative h-64 rounded-2xl overflow-hidden flex flex-col justify-end p-5 border border-zinc-200 dark:border-zinc-800 hover:border-sport-500 shadow-sm transition-all hover:-translate-y-1">
           <div class="absolute inset-0 bg-zinc-900/50 group-hover:bg-zinc-900/70 transition-colors z-10"></div>
-          <img src="https://images.unsplash.com/photo-1544966503-7cc5ac882d6f?w=300&auto=format&fit=crop&q=80" 
+          <img src="https://www.sportline.com.co/media/catalog/product/8/6/86m626-023_frontf1-001.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:" 
                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Chaquetas" />
           <h3 class="relative z-20 text-base font-black text-white font-display uppercase">Chaquetas</h3>
           <p class="relative z-20 text-xs text-zinc-300 mt-0.5">Ver productos ➔</p>
@@ -139,21 +139,21 @@ export function renderHome() {
     <section class="bg-zinc-100 dark:bg-zinc-900 py-24 transition-colors">
       <div class="mx-auto max-w-7xl px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="p-8 rounded-3xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-sport-500/50 transition-colors group">
-          <div class="w-12 h-12 rounded-2xl bg-sport-100 dark:bg-sport-950/40 flex items-center justify-center text-2xl mb-6">🏃</div>
+          <div class="w-12 h-12 rounded-2xl bg-sport-100 dark:bg-sport-950/40 flex items-center justify-center text-2xl mb-6">🤼‍♂️</div>
           <h3 class="text-xl font-black uppercase text-zinc-900 dark:text-white mb-3 font-display">Rendimiento</h3>
           <p class="text-slate-500 dark:text-stone-400 text-sm leading-relaxed">
             Todos nuestros productos están diseñados para maximizar tu rendimiento deportivo, con materiales técnicos de última generación.
           </p>
         </div>
         <div class="p-8 rounded-3xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-sport-500/50 transition-colors group">
-          <div class="w-12 h-12 rounded-2xl bg-sport-100 dark:bg-sport-950/40 flex items-center justify-center text-2xl mb-6">🚚</div>
+          <div class="w-12 h-12 rounded-2xl bg-sport-100 dark:bg-sport-950/40 flex items-center justify-center text-2xl mb-6">📦</div>
           <h3 class="text-xl font-black uppercase text-zinc-900 dark:text-white mb-3 font-display">Envío Rápido</h3>
           <p class="text-slate-500 dark:text-stone-400 text-sm leading-relaxed">
             Despacho en 24 horas hábiles a todo el territorio nacional. Rastreo en tiempo real de tu pedido y garantía de entrega.
           </p>
         </div>
         <div class="p-8 rounded-3xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-sport-500/50 transition-colors group">
-          <div class="w-12 h-12 rounded-2xl bg-sport-100 dark:bg-sport-950/40 flex items-center justify-center text-2xl mb-6">🏆</div>
+          <div class="w-12 h-12 rounded-2xl bg-sport-100 dark:bg-sport-950/40 flex items-center justify-center text-2xl mb-6">🔝</div>
           <h3 class="text-xl font-black uppercase text-zinc-900 dark:text-white mb-3 font-display">Marcas Top</h3>
           <p class="text-slate-500 dark:text-stone-400 text-sm leading-relaxed">
             Trabajamos con las mejores marcas deportivas del mercado para garantizarte calidad premium en cada artículo que adquieras.
