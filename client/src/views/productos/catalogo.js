@@ -510,18 +510,97 @@ export async function setupCatalogo() {
     });
   });
 
-  // Cargar productos desde el API
+  // Cargar productos desde el API con manejo de cold start de Render
+  const grid = document.getElementById("product-grid");
+
+  // Mostrar mensaje de "servidor despertando" tras 3 segundos sin respuesta
+  const coldStartTimer = setTimeout(() => {
+    if (!grid) return;
+    grid.innerHTML = `
+    <div class="col-span-full py-16 flex flex-col items-center justify-center text-center gap-5">
+      <!-- Ícono animado de servidor -->
+      <div class="relative flex items-center justify-center w-20 h-20">
+        <div class="absolute inset-0 rounded-full bg-sport-500/10 animate-ping"></div>
+        <div class="relative flex items-center justify-center w-20 h-20 rounded-full bg-sport-500/10 border border-sport-500/30">
+          <svg class="w-9 h-9 text-sport-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3V6a3 3 0 013-3h13.5a3 3 0 013 3v5.25a3 3 0 01-3 3m-13.5 0v3.75m13.5-3.75v3.75m0 0H5.25m13.5 0a3 3 0 01-3 3H8.25a3 3 0 01-3-3"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Textos -->
+      <div>
+        <h3 class="text-lg font-black uppercase text-zinc-900 dark:text-white font-display">
+          Despertando el servidor...
+        </h3>
+        <p class="text-sm text-zinc-500 dark:text-stone-400 mt-1 max-w-xs mx-auto">
+          El servidor gratuito entra en reposo tras inactividad.<br>
+          <span class="text-sport-500 font-semibold">Esto puede tardar hasta 60 segundos.</span>
+        </p>
+      </div>
+
+      <!-- Barra de progreso animada -->
+      <div class="w-64 bg-zinc-200 dark:bg-zinc-800 rounded-full h-1.5 overflow-hidden">
+        <div id="cold-start-bar" class="h-full bg-gradient-to-r from-sport-400 to-sport-600 rounded-full" style="width:0%"></div>
+      </div>
+      <p id="cold-start-tip" class="text-xs text-zinc-400 dark:text-stone-500 italic">Conectando con la tienda...</p>
+    </div>
+    `;
+
+    // Animar la barra de progreso durante ~55 segundos
+    let pct = 0;
+    const tips = [
+      "Iniciando base de datos...",
+      "Cargando catálogo de productos...",
+      "Casi listo, un momento más...",
+      "Estableciendo conexión segura...",
+    ];
+    let tipIdx = 0;
+    const bar = document.getElementById("cold-start-bar");
+    const tipEl = document.getElementById("cold-start-tip");
+    const barInterval = setInterval(() => {
+      pct = Math.min(pct + (pct < 70 ? 1.2 : 0.3), 92);
+      if (bar) bar.style.width = pct + "%";
+      if (pct % 20 < 1.5 && tipEl && tipIdx < tips.length) {
+        tipEl.textContent = tips[tipIdx++];
+      }
+    }, 650);
+    // Guardar referencia para limpiarla si carga exitosamente
+    window._coldStartBarInterval = barInterval;
+  }, 3000);
+
   try {
     productosMemoria = await obtenerProductos();
+    clearTimeout(coldStartTimer);
+    // Limpiar barra si seguía animándose
+    if (window._coldStartBarInterval) {
+      clearInterval(window._coldStartBarInterval);
+      delete window._coldStartBarInterval;
+    }
     filtrarProductos();
   } catch (err) {
-    const grid = document.getElementById("product-grid");
+    clearTimeout(coldStartTimer);
+    if (window._coldStartBarInterval) {
+      clearInterval(window._coldStartBarInterval);
+      delete window._coldStartBarInterval;
+    }
     if (grid) {
       grid.innerHTML = `
-      <div class="col-span-full py-20 flex flex-col items-center justify-center text-center text-red-500">
-        <svg class="w-16 h-16 text-red-400 dark:text-red-800" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-        <h3 class="text-lg font-black uppercase mt-4 font-display">Error al conectar con la tienda</h3>
-        <p class="text-sm text-zinc-500 mt-2">Por favor, valida que el servidor API se encuentre en ejecución.</p>
+      <div class="col-span-full py-20 flex flex-col items-center justify-center text-center gap-4">
+        <svg class="w-16 h-16 text-red-400 dark:text-red-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        </svg>
+        <h3 class="text-lg font-black uppercase text-zinc-900 dark:text-white font-display">No se pudo conectar con el servidor</h3>
+        <p class="text-sm text-zinc-500 dark:text-stone-400 max-w-xs mx-auto">
+          El servidor no respondió a tiempo. Por favor recarga la página e intenta de nuevo.
+        </p>
+        <button onclick="window.location.reload()"
+          class="mt-2 rounded-xl bg-sport-500 hover:bg-sport-600 text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all hover:scale-105 cursor-pointer flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          Reintentar
+        </button>
       </div>
       `;
     }
