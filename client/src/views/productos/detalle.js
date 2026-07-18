@@ -181,7 +181,7 @@ export async function setupDetalle(params) {
         }
       });
 
-      // Agregar al carrito
+      // Add to cart
       const btnAdd = document.getElementById("add-to-cart-btn");
       btnAdd?.addEventListener("click", () => {
         agregarAlCarrito(producto, tallaSeleccionada, colorSeleccionado, cantidadSeleccionada);

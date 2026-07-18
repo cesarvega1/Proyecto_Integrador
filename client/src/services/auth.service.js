@@ -8,7 +8,7 @@ export async function handleResponse(response) {
   return response.json();
 }
 
-// Registra un nuevo usuario en la base de datos (con rol USER por defecto)
+// Register new user in database (with USER role)
 export async function registrarUsuario(usuario) {
   const nuevoUsuario = {
     ...usuario,
@@ -22,7 +22,7 @@ export async function registrarUsuario(usuario) {
   return handleResponse(response);
 }
 
-// Inicia sesión buscando el correo y contraseña del usuario
+// Login user with email and password
 export async function loginUsuario(email, password) {
   const response = await fetch(`${BASE_URL}/users?email=${email}&password=${password}`);
   if (!response.ok) throw new Error("Error al conectar con la API");
@@ -30,17 +30,17 @@ export async function loginUsuario(email, password) {
   return usuarios.length > 0 ? usuarios[0] : null;
 }
 
-// Guarda la sesión en localStorage
+// Save session in local storage
 export function guardarSesion(usuario) {
   localStorage.setItem("usuario", JSON.stringify(usuario));
 }
 
-// Devuelve el usuario actualmente autenticado
+// Get current logged in user
 export function obtenerSesion() {
   return JSON.parse(localStorage.getItem("usuario"));
 }
 
-// Cierra sesión
+// Logout user
 export function cerrarSesion() {
   localStorage.removeItem("usuario");
 }

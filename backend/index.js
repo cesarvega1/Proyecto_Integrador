@@ -14,13 +14,13 @@ app.use(express.json());
 
 let db;
 
-// Inicializar la base de datos
+// Start database
 async function initDB() {
     db = await open({
         filename: DB_SQLITE_PATH,
         driver: sqlite3.Database
     });
-    console.log('Conectado a la base de datos SQLite.');
+    console.log('Connected to SQLite database.');
 }
 
 // Helper to parse JSON fields safely
@@ -33,7 +33,7 @@ const parseJSON = (field) => {
 };
 
 // ----------------------
-// RUTAS DE USUARIOS
+// USER ROUTES
 // ----------------------
 app.get('/users', async (req, res) => {
     try {
@@ -124,7 +124,7 @@ app.patch('/users/:id', async (req, res) => {
 });
 
 // ----------------------
-// RUTAS DE PRODUCTOS
+// PRODUCT ROUTES
 // ----------------------
 app.get('/productos', async (req, res) => {
     try {
@@ -243,7 +243,7 @@ app.delete('/productos/:id', async (req, res) => {
 });
 
 // ----------------------
-// RUTAS DE ÓRDENES
+// ORDER ROUTES
 // ----------------------
 app.get('/ordenes', async (req, res) => {
     try {
@@ -270,11 +270,11 @@ app.post('/ordenes', async (req, res) => {
     try {
         const { userId, fecha, estado, total, productos } = req.body;
 
-        // Iniciar transacción para garantizar atomicidad
+        // Start transaction
         await db.run('BEGIN TRANSACTION');
 
         try {
-            // 1. Verificar y descontar stock de cada producto
+            // 1. Check and reduce stock
             for (const item of (productos || [])) {
                 const producto = await db.get('SELECT stock FROM productos WHERE id = ?', [item.productoId]);
 
@@ -290,14 +290,14 @@ app.post('/ordenes', async (req, res) => {
                     });
                 }
 
-                // Descontar stock
+                // Reduce stock
                 await db.run(
                     'UPDATE productos SET stock = stock - ? WHERE id = ?',
                     [item.cantidad, item.productoId]
                 );
             }
 
-            // 2. Crear el registro de la orden
+            // 2. Create order record
             const result = await db.run(
                 'INSERT INTO ordenes (userId, fecha, estado, total, productos) VALUES (?, ?, ?, ?, ?)',
                 [userId, fecha, estado, total, JSON.stringify(productos || [])]
@@ -345,7 +345,7 @@ app.patch('/ordenes/:id', async (req, res) => {
 });
 
 // ----------------------
-// RUTAS DE CIERRES
+// CLOSING ROUTES
 // ----------------------
 app.get('/cierres', async (req, res) => {
     try {
@@ -358,25 +358,25 @@ app.get('/cierres', async (req, res) => {
 
 app.post('/cierres', async (req, res) => {
     try {
-        // 1. Obtener órdenes del día (o no cerradas)
+        // 1. Get open orders
         const ordenesNoCerradas = await db.all('SELECT * FROM ordenes WHERE cerrada = 0 OR cerrada IS NULL');
         
         if (ordenesNoCerradas.length === 0) {
             return res.status(400).json({ message: 'No hay órdenes pendientes por cerrar.' });
         }
 
-        // 2. Calcular totales
+        // 2. Calculate totals
         const total_ordenes = ordenesNoCerradas.length;
         const total_ingresos = ordenesNoCerradas.reduce((acc, ord) => acc + ord.total, 0);
         const fecha = new Date().toISOString();
 
-        // 3. Guardar el cierre
+        // 3. Save closing
         const result = await db.run(
             'INSERT INTO cierres (fecha, total_ingresos, total_ordenes) VALUES (?, ?, ?)',
             [fecha, total_ingresos, total_ordenes]
         );
 
-        // 4. Marcar órdenes como cerradas
+        // 4. Mark orders as closed
         await db.run('UPDATE ordenes SET cerrada = 1 WHERE cerrada = 0 OR cerrada IS NULL');
 
         res.status(201).json({
@@ -390,10 +390,10 @@ app.post('/cierres', async (req, res) => {
     }
 });
 
-// Arrancar el servidor
+// Start server
 initDB().then(() => {
     app.listen(PORT, () => {
-        console.log(`Servidor Express conectado a SQLite corriendo en el puerto ${PORT}`);
+        console.log(`Express server connected to SQLite running on port ${PORT}`);
     });
 }).catch(err => {
     console.error('No se pudo inicializar la base de datos:', err);

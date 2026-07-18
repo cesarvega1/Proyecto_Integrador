@@ -2,16 +2,16 @@ import "./styles/global.css";
 import { initRouter, renderRoute, navigate } from "./router/router.js";
 import { initTheme } from "./utils/theme.js";
 
-// Inicializa el tema (Oscuro/Claro) según la preferencia persistente
+// Start theme (Dark/Light)
 initTheme();
 
-// Arranca el enrutador escuchando popstate del navegador
+// Start router
 initRouter();
 
-// Renderiza la vista inicial de la ruta cargada
+// Show first view
 renderRoute();
 
-// Intercepta clics globales de enlaces marcados con data-link
+// Catch clicks on links
 document.addEventListener("click", (e) => {
   const link = e.target.closest("[data-link]");
   if (link) {

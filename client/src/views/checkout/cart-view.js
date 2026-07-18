@@ -35,18 +35,18 @@ export function renderCart() {
     contenidoHtml = `
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
       
-      <!-- Columna Izquierda: Listado de Prendas -->
+      <!-- Left Column: Product List -->
       <div class="lg:col-span-2 grid gap-6">
         ${carrito.map(item => {
           return `
           <div class="flex flex-col sm:flex-row items-center gap-6 rounded-3xl bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 p-6 shadow-sm transition-colors">
             
-            <!-- Imagen -->
+            <!-- Image -->
             <div class="w-24 h-24 rounded-2xl overflow-hidden bg-stone-150 border border-stone-200 dark:border-stone-800 shrink-0">
               <img src="${item.imagen}" alt="${item.nombre}" class="w-full h-full object-cover" />
             </div>
 
-            <!-- Datos de Prenda -->
+            <!-- Product Data -->
             <div class="flex-1 text-center sm:text-left">
               <h3 class="text-base font-bold text-slate-900 dark:text-stone-100 font-serif">${item.nombre}</h3>
               <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 mt-1.5 text-xs text-slate-500 dark:text-stone-400">
@@ -57,10 +57,10 @@ export function renderCart() {
               <span class="block text-sm font-extrabold text-burgundy-850 dark:text-rosegold-400 font-serif mt-3">$${item.precio.toLocaleString()} c/u</span>
             </div>
 
-            <!-- Cantidad y Borrado -->
+            <!-- Quantity and Delete -->
             <div class="flex sm:flex-col items-center justify-between sm:justify-end gap-6 w-full sm:w-auto mt-4 sm:mt-0 pt-4 sm:pt-0 border-t sm:border-t-0 border-stone-200 dark:border-stone-800">
               
-              <!-- Controles de Cantidad -->
+              <!-- Quantity Controls -->
               <div class="flex items-center gap-2">
                 <button class="cart-qty-dec w-8 h-8 rounded-lg border border-stone-300 dark:border-stone-800 text-xs font-bold hover:bg-stone-100 dark:hover:bg-stone-850 cursor-pointer"
                   data-id="${item.id}" data-talla="${item.talla}" data-color="${item.color}">-</button>
@@ -69,7 +69,7 @@ export function renderCart() {
                   data-id="${item.id}" data-talla="${item.talla}" data-color="${item.color}" data-max="${item.stockMaximo}">+</button>
               </div>
 
-              <!-- Eliminar -->
+              <!-- Delete -->
               <button class="cart-remove-btn text-xs font-bold text-red-500 hover:text-red-700 transition-colors flex items-center gap-1 cursor-pointer"
                 data-id="${item.id}" data-talla="${item.talla}" data-color="${item.color}">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg> Eliminar
@@ -82,7 +82,7 @@ export function renderCart() {
         }).join("")}
       </div>
 
-      <!-- Columna Derecha: Resumen de Compra -->
+      <!-- Right Column: Order Summary -->
       <div class="rounded-3xl bg-cream-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-850 p-8 shadow-sm">
         <h3 class="text-xl font-bold text-burgundy-850 dark:text-stone-100 font-serif mb-6 pb-4 border-b border-stone-200 dark:border-stone-850">Resumen del Pedido</h3>
         
@@ -112,7 +112,7 @@ export function renderCart() {
           </div>
         </div>
 
-        <!-- Sección de Cupón -->
+        <!-- Coupon Section -->
         <div class="mt-8 pt-6 border-t border-stone-200 dark:border-stone-800">
           <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-stone-400 mb-2" for="coupon-input">Cupón de Descuento</label>
           <div class="flex gap-2">
@@ -125,7 +125,7 @@ export function renderCart() {
           ${mensajeCupon ? `<p class="mt-2 text-xs font-semibold ${descuentoPorcentaje > 0 ? "text-green-600" : "text-red-500"}">${mensajeCupon}</p>` : ""}
         </div>
 
-        <!-- Botón Checkout -->
+        <!-- Checkout Button -->
         <div class="mt-8">
           <button id="checkout-proceed-btn" class="w-full rounded-xl bg-burgundy-850 hover:bg-burgundy-600 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer text-center flex items-center justify-center gap-2">
             ${usuario ? "Proceder al Checkout <svg class=\"w-4 h-4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M17 8l4 4m0 0l-4 4m4-4H3\"></path></svg>" : "Iniciar Sesión para Comprar <svg class=\"w-4 h-4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M17 8l4 4m0 0l-4 4m4-4H3\"></path></svg>"}
@@ -163,19 +163,19 @@ export function renderCart() {
 function recargarCarrito() {
   const container = document.getElementById("cart-content-container");
   if (container) {
-    // Para simplificar, volvemos a renderizar el bloque interior
+    // Re-render inner block
     const dummyDiv = document.createElement("div");
     dummyDiv.innerHTML = renderCart();
-    // Extraemos solo el contenedor del contenido
+    // Extract content container
     const nuevoContenido = dummyDiv.querySelector("#cart-content-container").innerHTML;
     container.innerHTML = nuevoContenido;
-    // Volvemos a atar los eventos
+    // Bind events again
     vincularEventosCarrito();
   }
 }
 
 function vincularEventosCarrito() {
-  // Incrementar cantidad
+  // Increase quantity
   document.querySelectorAll(".cart-qty-inc").forEach(btn => {
     btn.addEventListener("click", () => {
       const id = parseInt(btn.getAttribute("data-id"));
@@ -192,7 +192,7 @@ function vincularEventosCarrito() {
     });
   });
 
-  // Decrementar cantidad
+  // Decrease quantity
   document.querySelectorAll(".cart-qty-dec").forEach(btn => {
     btn.addEventListener("click", () => {
       const id = parseInt(btn.getAttribute("data-id"));
@@ -208,7 +208,7 @@ function vincularEventosCarrito() {
     });
   });
 
-  // Eliminar producto
+  // Delete product
   document.querySelectorAll(".cart-remove-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const id = parseInt(btn.getAttribute("data-id"));
@@ -220,7 +220,7 @@ function vincularEventosCarrito() {
     });
   });
 
-  // Aplicar cupón
+  // Apply coupon
   const applyBtn = document.getElementById("coupon-apply-btn");
   applyBtn?.addEventListener("click", () => {
     const input = document.getElementById("coupon-input");
@@ -240,14 +240,14 @@ function vincularEventosCarrito() {
     recargarCarrito();
   });
 
-  // Proceder a checkout
+  // Go to checkout
   const checkoutBtn = document.getElementById("checkout-proceed-btn");
   checkoutBtn?.addEventListener("click", () => {
     const usuario = obtenerSesion();
     if (!usuario) {
       navigate("/login");
     } else {
-      // Guardar el descuento en sessionStorage para usarlo en el Checkout
+      // Save discount in sessionStorage
       sessionStorage.setItem("descuentoPorcentaje", descuentoPorcentaje);
       navigate("/checkout");
     }

@@ -77,7 +77,7 @@ export function setupRegister() {
     }
 
     try {
-      // Validar si el email ya existe
+      // Check if email exists
       const checkEmailRes = await fetch(`http://localhost:3000/users?email=${email}`);
       const existing = await checkEmailRes.json();
       if (existing.length > 0) {
@@ -86,7 +86,7 @@ export function setupRegister() {
         return;
       }
 
-      // Proceder con el registro
+      // Register user
       const usuario = { name, lastName, email, password };
       const registrado = await registrarUsuario(usuario);
       

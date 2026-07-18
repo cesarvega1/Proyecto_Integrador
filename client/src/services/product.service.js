@@ -2,21 +2,21 @@ import { BASE_URL, handleResponse } from "./auth.service.js";
 
 const API = `${BASE_URL}/productos`;
 
-// Obtiene todos los productos del catálogo
+// Get all products
 export async function obtenerProductos() {
   const response = await fetch(API);
   if (!response.ok) throw new Error("Error al obtener las prendas");
   return await response.json();
 }
 
-// Obtiene los detalles de una prenda por su ID
+// Get product details by ID
 export async function obtenerProductoPorId(id) {
   const response = await fetch(`${API}/${id}`);
   if (!response.ok) throw new Error("Error al obtener detalles de la prenda");
   return await response.json();
 }
 
-// Crea una nueva prenda (Solo Administradores)
+// Create new product (Admin only)
 export async function crearProducto(producto) {
   const response = await fetch(API, {
     method: "POST",
@@ -27,7 +27,7 @@ export async function crearProducto(producto) {
   return await response.json();
 }
 
-// Actualiza los datos de una prenda (Solo Administradores)
+// Update product data (Admin only)
 export async function actualizarProducto(id, producto) {
   const response = await fetch(`${API}/${id}`, {
     method: "PUT",
@@ -38,7 +38,7 @@ export async function actualizarProducto(id, producto) {
   return await response.json();
 }
 
-// Elimina una prenda del inventario (Solo Administradores)
+// Delete product (Admin only)
 export async function eliminarProducto(id) {
   const response = await fetch(`${API}/${id}`, {
     method: "DELETE",

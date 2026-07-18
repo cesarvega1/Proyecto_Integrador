@@ -2,21 +2,21 @@ import routes from "./routes.js";
 
 const app = document.getElementById("app");
 
-// Navega a una ruta sin recargar la página
+// Go to page without reload
 export function navigate(path) {
   window.history.pushState({}, "", path);
   renderRoute();
 }
 
-// Renderiza la vista según la ruta actual
+// Show view for current page
 export function renderRoute() {
   const path = window.location.pathname;
   
-  // Buscar si coincide con una ruta dinámica como /producto/:id
+  // Find dynamic routes like /producto/:id
   let matchedRouteKey = path;
   let params = {};
 
-  // Soporte básico para rutas dinámicas como /producto/:id
+  // Basic support for dynamic routes
   for (const key of Object.keys(routes)) {
     if (key.includes("/:") ) {
       const parts = key.split("/:");
@@ -40,7 +40,7 @@ export function renderRoute() {
     return;
   }
 
-  // Verificar autenticación
+  // Check login
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
   if (route.protected && !usuario) {
@@ -48,7 +48,7 @@ export function renderRoute() {
     return;
   }
 
-  // Verificar si es solo para administradores
+  // Check if admin only
   if (route.adminOnly) {
     if (!usuario || !usuario.role.includes("ADMIN")) {
       navigate("/");
@@ -56,17 +56,17 @@ export function renderRoute() {
     }
   }
 
-  // Renderizar e inyectar el HTML
+  // Show HTML
   app.innerHTML = route.render(params);
 
-  // Ejecutar lógica adicional de la vista
+  // Run page logic
   route.setup?.(params);
   
-  // Scroll hacia la parte superior al cambiar de página
+  // Go to top on page change
   window.scrollTo(0, 0);
 }
 
-// Escucha popstate para cuando el usuario usa atrás/adelante en el navegador
+// Listen for back/forward buttons
 export function initRouter() {
   window.addEventListener("popstate", renderRoute);
 }

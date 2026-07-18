@@ -2,14 +2,14 @@
 const EMAILJS_SERVICE_ID = "service_lolzt1m";
 const EMAILJS_TEMPLATE_ID = "template_ji8m999";
 /**
- * Envía un correo de confirmación de compra al cliente.
- * @param {Object} orden   - Objeto de orden creado
- * @param {string} email   - Correo electrónico del cliente
- * @param {string} nombre  - Nombre completo del cliente
+ * Send purchase confirmation email to client.
+ * @param {Object} orden   - Created order object
+ * @param {string} email   - Client email
+ * @param {string} nombre  - Client full name
  * @returns {Promise<void>}
  */
 export async function enviarCorreoConfirmacion(orden, email, nombre) {
-  // Construir lista de productos en texto plano
+  // Build plain text product list
   const productosList = orden.productos
     .map(p =>
       `• ${p.nombre} (Talla: ${p.talla} | Color: ${p.color}) x${p.cantidad} = $${(p.precioUnitario * p.cantidad).toLocaleString("es-CO")}`
@@ -30,7 +30,7 @@ export async function enviarCorreoConfirmacion(orden, email, nombre) {
     store_name: "SportZone"
   };
 
-  // Verificar que la librería EmailJS esté disponible
+  // Check if EmailJS is available
   if (typeof emailjs === "undefined") {
     console.warn("EmailJS no está disponible. Verifica que el SDK esté cargado en index.html.");
     return;

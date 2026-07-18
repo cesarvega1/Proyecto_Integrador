@@ -59,7 +59,7 @@ export function setupLogin() {
       }
       guardarSesion(usuario);
       
-      // Si el usuario es administrador, redirecciona al panel de admin; si no, al dashboard
+      // Go to admin panel if admin, else dashboard
       if (usuario.role.includes("ADMIN")) {
         navigate("/admin");
       } else {

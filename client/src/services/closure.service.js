@@ -2,14 +2,14 @@ import { BASE_URL, handleResponse } from "./auth.service.js";
 
 const API = `${BASE_URL}/cierres`;
 
-// Obtener todos los cierres
+// Get all closings
 export async function obtenerCierres() {
   const response = await fetch(API);
   if (!response.ok) throw new Error("Error al obtener cierres");
   return await response.json();
 }
 
-// Crear un nuevo cierre
+// Create new closing
 export async function crearCierre() {
   const response = await fetch(API, {
     method: "POST"

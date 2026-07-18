@@ -90,7 +90,7 @@ export function setupProfile() {
     const password = document.getElementById("profile-password").value;
 
     try {
-      // Validar si el email ya existe y no es el del propio usuario
+      // Check if email exists y no es el del propio usuario
       if (email !== usuarioActual.email) {
         const checkEmailRes = await fetch(`http://localhost:3000/users?email=${email}`);
         const existing = await checkEmailRes.json();

@@ -336,9 +336,9 @@ export function renderCheckout() {
   `;
 }
 
-// ─────────────────────────────────────────────────────────
+// ---------------------------------------------------------
 // SETUP
-// ─────────────────────────────────────────────────────────
+// ---------------------------------------------------------
 export function setupCheckout() {
   setupNavbar();
 
@@ -354,29 +354,29 @@ export function setupCheckout() {
 
   if (!form) return;
 
-  // ── Toggle visual de métodos de pago ──────────────────
+  // -- Toggle payment methods --
   document.querySelectorAll('input[name="payment-method"]').forEach(radio => {
     radio.addEventListener("change", (e) => {
       if (e.target.value === "tarjeta") {
-        // Mostrar tarjeta
+        // Show card
         cardFields.classList.remove("hidden");
         transferInstructions.classList.add("hidden");
         document.getElementById("card-number").setAttribute("required", "required");
         document.getElementById("card-expiry").setAttribute("required", "required");
         document.getElementById("card-cvv").setAttribute("required", "required");
-        // Estilos activos / inactivos
+        // Active / inactive styles
         labelTarjeta.classList.replace("border-zinc-300", "border-sport-500");
         labelTarjeta.classList.add("bg-sport-50", "dark:bg-sport-950/10");
         labelTransferencia.classList.replace("border-sport-500", "border-zinc-300");
         labelTransferencia.classList.remove("bg-sport-50", "dark:bg-sport-950/10");
       } else {
-        // Mostrar transferencia
+        // Show transfer
         cardFields.classList.add("hidden");
         transferInstructions.classList.remove("hidden");
         document.getElementById("card-number").removeAttribute("required");
         document.getElementById("card-expiry").removeAttribute("required");
         document.getElementById("card-cvv").removeAttribute("required");
-        // Estilos activos / inactivos
+        // Active / inactive styles
         labelTransferencia.classList.replace("border-zinc-300", "border-sport-500");
         labelTransferencia.classList.add("bg-sport-50", "dark:bg-sport-950/10");
         labelTarjeta.classList.replace("border-sport-500", "border-zinc-300");
@@ -385,25 +385,25 @@ export function setupCheckout() {
     });
   });
 
-  // ── Formato automático número de tarjeta ─────────────
+  // -- Auto format card number --
   document.getElementById("card-number")?.addEventListener("input", (e) => {
     let v = e.target.value.replace(/\D/g, "");
     v = v.match(/.{1,4}/g)?.join(" ") || v;
     e.target.value = v;
   });
 
-  // ── Formato automático fecha expiración ──────────────
+  // -- Auto format expiration date --
   document.getElementById("card-expiry")?.addEventListener("input", (e) => {
     let v = e.target.value.replace(/\D/g, "");
     if (v.length > 2) v = v.slice(0, 2) + "/" + v.slice(2, 4);
     e.target.value = v;
   });
 
-  // ── Botones del modal ─────────────────────────────────
+  // -- Modal buttons --
   document.getElementById("modal-dashboard-btn")?.addEventListener("click", () => navigate("/dashboard"));
   document.getElementById("modal-continue-btn")?.addEventListener("click", () => navigate("/productos"));
 
-  // ── Submit de la orden ────────────────────────────────
+  // -- Submit order --
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -426,7 +426,7 @@ export function setupCheckout() {
       transferencia: "Transferencia Bancaria"
     };
 
-    // Armar objeto de orden
+    // Build order object
     const orden = {
       userId: usuario.id,
       fecha: new Date().toISOString().split("T")[0],
@@ -445,28 +445,28 @@ export function setupCheckout() {
       metodoPago: metodosMapeo[metodoVal]
     };
 
-    // Mostrar spinner en el botón
+    // Show spinner on button
     submitText.textContent = "Procesando...";
     submitBtn.disabled = true;
     submitSpinner.classList.remove("hidden");
     errorBox.classList.add("hidden");
 
     try {
-      // 1️⃣ Guardar orden en la base de datos
+      // 1. Save order in database
       const nuevaOrden = await crearOrden(orden);
       vaciarCarrito();
       sessionStorage.removeItem("descuentoPorcentaje");
 
-      // 2️⃣ Llenar datos del modal de éxito
+      // 2. Fill success modal data
       document.getElementById("modal-order-id").textContent = `#${nuevaOrden.id ?? "---"}`;
       document.getElementById("modal-total").textContent = `$${total.toLocaleString()}`;
       document.getElementById("modal-metodo").textContent = metodosMapeo[metodoVal];
       document.getElementById("modal-email").textContent = email;
 
-      // 3️⃣ Mostrar modal inmediatamente
+      // 3. Show modal
       document.getElementById("success-modal").classList.remove("hidden");
 
-      // 4️⃣ Intentar enviar correo de confirmación (no bloquea el flujo)
+      // 4. Try to send confirmation email
       const emailStatusDiv = document.getElementById("modal-email-status");
       try {
         await enviarCorreoConfirmacion({ ...nuevaOrden, ...orden }, email, nombre);
@@ -481,11 +481,11 @@ export function setupCheckout() {
       }
 
     } catch (err) {
-      // Error al guardar la orden (ej: stock insuficiente)
+      // Error saving order (e.g. no stock)
       errorBox.innerHTML = `<span class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg> ${err.message || "No se pudo procesar el pedido. Verifica que el servidor API esté activo."}</span>`;
       errorBox.classList.remove("hidden");
 
-      // Restaurar botón
+      // Restore button
       submitText.innerHTML = `<span class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg> Confirmar Pedido — $${total.toLocaleString()}</span>`;
       submitBtn.disabled = false;
       submitSpinner.classList.add("hidden");

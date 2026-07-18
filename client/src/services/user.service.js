@@ -2,21 +2,21 @@ import { BASE_URL, handleResponse } from "./auth.service.js";
 
 const API = `${BASE_URL}/users`;
 
-// Obtiene todos los usuarios
+// Get all users
 export async function obtenerUsuarios() {
   const response = await fetch(API);
   if (!response.ok) throw new Error("Error al obtener la lista de usuarios");
   return await response.json();
 }
 
-// Obtiene un usuario específico por su ID
+// Get specific user by ID
 export async function obtenerUsuarioPorId(id) {
   const response = await fetch(`${API}/${id}`);
   if (!response.ok) throw new Error("Error al obtener datos del usuario");
   return await response.json();
 }
 
-// Actualiza los datos del perfil de un usuario
+// Update user profile data
 export async function actualizarUsuario(id, datos) {
   const response = await fetch(`${API}/${id}`, {
     method: "PATCH",
@@ -27,7 +27,7 @@ export async function actualizarUsuario(id, datos) {
   return await response.json();
 }
 
-// Cambia el rol de un usuario (Ej. de USER a ADMIN)
+// Change user role (e.g. USER to ADMIN)
 export async function actualizarRolUsuario(id, roles) {
   const response = await fetch(`${API}/${id}`, {
     method: "PATCH",

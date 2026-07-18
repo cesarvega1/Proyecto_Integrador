@@ -1,4 +1,4 @@
-// Manejo del carrito de compras local en LocalStorage
+// Local storage cart management
 
 export function obtenerCarrito() {
   const cart = localStorage.getItem("carrito");
@@ -7,14 +7,14 @@ export function obtenerCarrito() {
 
 export function guardarCarrito(carrito) {
   localStorage.setItem("carrito", JSON.stringify(carrito));
-  // Dispara un evento personalizado para actualizar contadores flotantes si los hay
+  // Trigger cart update event
   window.dispatchEvent(new Event("cart-updated"));
 }
 
 export function agregarAlCarrito(producto, talla, color, cantidad = 1) {
   const carrito = obtenerCarrito();
   
-  // Buscar si ya existe la misma prenda con la misma talla y el mismo color
+  // Check if item exists
   const index = carrito.findIndex(
     (item) => item.id === producto.id && item.talla === talla && item.color === color
   );

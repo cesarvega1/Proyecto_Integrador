@@ -11,7 +11,7 @@ async function alterTable() {
             driver: sqlite3.Database
         });
 
-        // Agregamos la columna 'cerrada'
+        // Add closed column
         await db.exec(`
             ALTER TABLE ordenes ADD COLUMN cerrada INTEGER DEFAULT 0;
         `);
