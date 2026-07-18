@@ -3,6 +3,25 @@ import { renderNavbar, setupNavbar } from "../../components/navbar.js";
 import { renderFooter } from "../../components/footer.js";
 import { agregarAlCarrito } from "../../utils/cart.js";
 
+// ── Caché en sessionStorage para no re-fetchear en cada visita ──────────────
+const CACHE_KEY = "sportzone_productos";
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutos
+
+function getCachedProductos() {
+  try {
+    const raw = sessionStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    const { ts, data } = JSON.parse(raw);
+    if (Date.now() - ts > CACHE_TTL) { sessionStorage.removeItem(CACHE_KEY); return null; }
+    return data;
+  } catch { return null; }
+}
+
+function setCachedProductos(data) {
+  try { sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data })); } catch {}
+}
+// ────────────────────────────────────────────────────────────────────────────
+
 // Variable local de la vista para mantener el estado de los productos cargados
 let productosMemoria = [];
 let categoriaSeleccionada = "Todos";
@@ -158,7 +177,8 @@ function renderGridHTML(productos) {
     <div class="group flex flex-col rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-sm hover:shadow-md hover:border-sport-500/50 transition-all duration-300">
       <!-- Imagen con zoom en hover y badge de stock -->
       <div class="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800">
-        <img src="${p.imagen}" alt="${p.nombre}" 
+        <img src="${p.imagen.replace(/w=\d+/, 'w=400')}" alt="${p.nombre}"
+             loading="lazy" decoding="async"
              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
           <a href="/producto/${p.id}" data-link class="w-full text-center rounded-xl bg-white/90 dark:bg-zinc-950/90 py-2.5 text-xs font-bold text-slate-800 dark:text-white shadow-sm backdrop-blur-sm flex items-center justify-center gap-2">
@@ -570,14 +590,25 @@ export async function setupCatalogo() {
   }, 3000);
 
   try {
-    productosMemoria = await obtenerProductos();
-    clearTimeout(coldStartTimer);
-    // Limpiar barra si seguía animándose
-    if (window._coldStartBarInterval) {
-      clearInterval(window._coldStartBarInterval);
-      delete window._coldStartBarInterval;
+    // Intentar servir desde caché primero (instantáneo en re-visitas)
+    const cached = getCachedProductos();
+    if (cached && cached.length > 0) {
+      clearTimeout(coldStartTimer);
+      productosMemoria = cached;
+      filtrarProductos();
+      // Re-fetch en background silenciosamente para refrescar la caché
+      obtenerProductos().then(fresh => { setCachedProductos(fresh); }).catch(() => {});
+    } else {
+      productosMemoria = await obtenerProductos();
+      setCachedProductos(productosMemoria);
+      clearTimeout(coldStartTimer);
+      // Limpiar barra si seguía animándose
+      if (window._coldStartBarInterval) {
+        clearInterval(window._coldStartBarInterval);
+        delete window._coldStartBarInterval;
+      }
+      filtrarProductos();
     }
-    filtrarProductos();
   } catch (err) {
     clearTimeout(coldStartTimer);
     if (window._coldStartBarInterval) {
