@@ -1,6 +1,6 @@
 import { renderNavbar, setupNavbar } from "../../components/navbar.js";
 import { renderFooter } from "../../components/footer.js";
-import { obtenerSesion, guardarSesion } from "../../services/auth.service.js";
+import { obtenerSesion, guardarSesion, BASE_URL } from "../../services/auth.service.js";
 import { actualizarUsuario } from "../../services/user.service.js";
 import { navigate } from "../../router/router.js";
 
@@ -92,7 +92,7 @@ export function setupProfile() {
     try {
       // Check if email exists y no es el del propio usuario
       if (email !== usuarioActual.email) {
-        const checkEmailRes = await fetch(`http://localhost:3000/users?email=${email}`);
+        const checkEmailRes = await fetch(`${BASE_URL}/users?email=${email}`);
         const existing = await checkEmailRes.json();
         if (existing.length > 0) {
           errorBox.textContent = "El correo electrónico especificado ya pertenece a otra cuenta.";

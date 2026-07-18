@@ -1,4 +1,4 @@
-import { registrarUsuario, guardarSesion, loginUsuario } from "../../services/auth.service.js";
+import { registrarUsuario, guardarSesion, loginUsuario, BASE_URL } from "../../services/auth.service.js";
 import { navigate } from "../../router/router.js";
 
 export function renderRegister() {
@@ -78,7 +78,7 @@ export function setupRegister() {
 
     try {
       // Check if email exists
-      const checkEmailRes = await fetch(`http://localhost:3000/users?email=${email}`);
+      const checkEmailRes = await fetch(`${BASE_URL}/users?email=${email}`);
       const existing = await checkEmailRes.json();
       if (existing.length > 0) {
         errorBox.textContent = "Este correo electrónico ya está registrado.";
