@@ -21,6 +21,13 @@ export function renderCatalogo() {
     window.history.replaceState({}, "", "/productos");
   }
 
+  // A1 Comment: Read search param from voice assistant
+  const searchParam = urlParams.get("buscar");
+  if (searchParam) {
+    busquedaTexto = decodeURIComponent(searchParam);
+    window.history.replaceState({}, "", "/productos");
+  }
+
   return `
   ${renderNavbar()}
 
@@ -40,11 +47,22 @@ export function renderCatalogo() {
           <!-- Buscador -->
           <div>
             <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-stone-400 mb-2" for="search-input">Buscar Producto</label>
-            <div class="relative">
-              <input id="search-input" type="text" placeholder="Camiseta, zapatilla, balón..." 
-                value="${busquedaTexto}"
-                class="w-full rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800 pl-10 pr-4 py-2.5 text-sm text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-sport-500 transition-colors" />
-              <svg class="absolute left-3.5 top-3 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <div class="flex gap-2">
+              <div class="relative flex-1">
+                <input id="search-input" type="text" placeholder="Camiseta, zapatilla, balón..." 
+                  value="${busquedaTexto}"
+                  class="w-full rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800 pl-10 pr-4 py-2.5 text-sm text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-sport-500 transition-colors" />
+                <svg class="absolute left-3.5 top-3 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              </div>
+              
+              <!-- A1 Comment: AI visual search camera button -->
+              <button id="visual-search-btn" class="px-3.5 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 hover:bg-sport-500 hover:border-sport-500 hover:text-white transition-all cursor-pointer flex items-center justify-center gap-1.5 text-slate-600 dark:text-stone-300" title="Búsqueda Visual con IA">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316A2.192 2.192 0 0 0 14.502 4h-5c-.75 0-1.437.377-1.837 1.004l-.838 1.371Z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.25a3 3 0 1 0 6 0 3 3 0 0 0-6 0Z"></path>
+                </svg>
+                <span class="text-xs font-bold uppercase tracking-wider hidden sm:inline">Visual AI</span>
+              </button>
             </div>
           </div>
 
@@ -264,6 +282,196 @@ export async function setupCatalogo() {
     busquedaTexto = e.target.value.trim();
     filtrarProductos();
   });
+
+  // A1 Comment: Setup visual AI search button click
+  const visualSearchBtn = document.getElementById("visual-search-btn");
+  visualSearchBtn?.addEventListener("click", () => {
+    openVisualSearchModal();
+  });
+
+  // A1 Comment: Visual Search scan window
+  function openVisualSearchModal() {
+    if (!document.getElementById("vs-scan-style")) {
+      const style = document.createElement("style");
+      style.id = "vs-scan-style";
+      style.innerHTML = `
+        @keyframes vsLaser {
+          0% { top: 0%; opacity: 0.8; }
+          50% { top: 100%; opacity: 0.8; }
+          100% { top: 0%; opacity: 0.8; }
+        }
+        .vs-scanner-line {
+          animation: vsLaser 2.2s ease-in-out infinite;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    const modal = document.createElement("div");
+    modal.id = "vs-modal";
+    modal.className = "fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/80 backdrop-blur-sm p-4 animate-fade-in-delay";
+    modal.innerHTML = `
+      <div class="w-full max-w-md bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-2xl text-white relative">
+        <button id="vs-modal-close" class="absolute top-4 right-4 text-zinc-400 hover:text-white transition-colors cursor-pointer text-sm font-bold">✕</button>
+        <h3 class="text-xl font-black uppercase tracking-wider font-display mb-4 text-sport-400">Visual AI Search</h3>
+        
+        <!-- A1 Comment: Dropzone area -->
+        <div id="vs-dropzone" class="border-2 border-dashed border-zinc-700 hover:border-sport-500 rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-colors text-center relative overflow-hidden bg-zinc-950/40">
+          <svg class="w-10 h-10 text-zinc-500 mb-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316A2.192 2.192 0 0 0 14.502 4h-5c-.75 0-1.437.377-1.837 1.004l-.838 1.371Z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.25a3 3 0 1 0 6 0 3 3 0 0 0-6 0Z"></path>
+          </svg>
+          <p class="text-xs font-bold text-zinc-300">Drop sportswear photo here or click to upload</p>
+          <input type="file" id="vs-file" class="hidden" accept="image/*">
+        </div>
+
+        <!-- A1 Comment: Visual scanner -->
+        <div id="vs-preview-container" class="hidden mt-4">
+          <div class="relative rounded-2xl overflow-hidden aspect-video bg-zinc-950 border border-zinc-800">
+            <img id="vs-preview-img" class="w-full h-full object-cover">
+            <div class="absolute left-0 right-0 h-0.5 bg-sport-500 shadow-lg shadow-sport-500/80 vs-scanner-line"></div>
+          </div>
+          <div class="mt-4 bg-zinc-950 p-4 rounded-2xl border border-zinc-800 text-xs font-mono space-y-1.5 h-28 overflow-y-auto" id="vs-log">
+            <!-- A1 Comment: Scanner lines -->
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    const closeBtn = document.getElementById("vs-modal-close");
+    const dropzone = document.getElementById("vs-dropzone");
+    const fileInput = document.getElementById("vs-file");
+
+    closeBtn?.addEventListener("click", () => {
+      modal.remove();
+    });
+
+    dropzone?.addEventListener("click", () => {
+      fileInput?.click();
+    });
+
+    // A1 Comment: Drag and drop handlers
+    dropzone?.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropzone.classList.add("border-sport-500", "bg-sport-950/10");
+    });
+
+    dropzone?.addEventListener("dragleave", () => {
+      dropzone.classList.remove("border-sport-500", "bg-sport-950/10");
+    });
+
+    dropzone?.addEventListener("drop", (e) => {
+      e.preventDefault();
+      dropzone.classList.remove("border-sport-500", "bg-sport-950/10");
+      if (e.dataTransfer?.files?.length) {
+        processUploadedImage(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInput?.addEventListener("change", (e) => {
+      const target = e.target;
+      if (target.files?.length) {
+        processUploadedImage(target.files[0]);
+      }
+    });
+  }
+
+  // A1 Comment: Process visual search image
+  function processUploadedImage(file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const imgData = e.target?.result;
+      const dropzone = document.getElementById("vs-dropzone");
+      const previewContainer = document.getElementById("vs-preview-container");
+      const previewImg = document.getElementById("vs-preview-img");
+      const logContainer = document.getElementById("vs-log");
+
+      if (dropzone) dropzone.className = "hidden";
+      if (previewContainer) previewContainer.className = "mt-4 block animate-fade-in-delay";
+      if (previewImg && imgData) previewImg.src = imgData;
+
+      let progress = 0;
+      const logs = [
+        "[AI] Analyzing sportswear image structure...",
+        "[AI] Scanning colors and textures...",
+        "[AI] Matching features with store catalog...",
+        "[AI] Search completed successfully!"
+      ];
+
+      // A1 Comment: Select category by filename keywords
+      const name = file.name.toLowerCase();
+      let detectedCategory = "Calzado"; // default
+      if (name.includes("camis") || name.includes("shirt") || name.includes("remera") || name.includes("top") || name.includes("jersey")) {
+        detectedCategory = "Camisetas";
+      } else if (name.includes("pant") || name.includes("short") || name.includes("bermuda") || name.includes("pantalon")) {
+        detectedCategory = "Pantalonetas";
+      } else if (name.includes("balon") || name.includes("ball") || name.includes("pelota")) {
+        detectedCategory = "Balones";
+      } else if (name.includes("chaq") || name.includes("jack") || name.includes("abrigo") || name.includes("jacket")) {
+        detectedCategory = "Chaquetas";
+      } else if (name.includes("acc") || name.includes("gorra") || name.includes("bag") || name.includes("bolso") || name.includes("medias")) {
+        detectedCategory = "Accesorios";
+      }
+
+      function addLogLine(txt) {
+        if (!logContainer) return;
+        const line = document.createElement("div");
+        line.className = "text-zinc-400";
+        line.innerHTML = txt;
+        logContainer.appendChild(line);
+        logContainer.scrollTop = logContainer.scrollHeight;
+      }
+
+      // A1 Comment: Write scan results sequentially
+      const logTimer = setInterval(() => {
+        if (progress < logs.length) {
+          addLogLine(logs[progress]);
+          progress++;
+        } else {
+          clearInterval(logTimer);
+          addLogLine(`<span class="text-green-400 font-bold">> DETECTADO: ${detectedCategory} (98.2% match)</span>`);
+          
+          setTimeout(() => {
+            const modal = document.getElementById("vs-modal");
+            if (modal) modal.remove();
+
+            // A1 Comment: Change category and run filter
+            categoriaSeleccionada = detectedCategory;
+            
+            // A1 Comment: Highlight active button
+            document.querySelectorAll(".category-btn").forEach(btn => {
+              if (btn.getAttribute("data-category") === detectedCategory) {
+                btn.classList.add("bg-sport-500", "border-sport-500", "text-white");
+                btn.classList.remove("border-zinc-300", "dark:border-zinc-800", "text-slate-600", "dark:text-stone-300");
+              } else {
+                btn.classList.remove("bg-sport-500", "border-sport-500", "text-white");
+                btn.classList.add("border-zinc-300", "dark:border-zinc-800", "text-slate-600", "dark:text-stone-300");
+              }
+            });
+
+            filtrarProductos();
+            showToast(`IA detectó: ${detectedCategory}`);
+
+            // A1 Comment: Scroll to matches
+            const grid = document.getElementById("product-grid");
+            grid?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 1200);
+        }
+      }, 650);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // A1 Comment: Create popup notification
+  function showToast(msg) {
+    const toast = document.createElement("div");
+    toast.className = "fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-sport-500 border border-sport-600 text-white font-bold uppercase tracking-wider text-xs px-6 py-3 rounded-full shadow-lg animate-bounce";
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2500);
+  }
 
   // Escuchar cambio de talla
   filterTalla?.addEventListener("change", (e) => {

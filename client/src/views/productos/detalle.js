@@ -48,21 +48,63 @@ export async function setupDetalle(params) {
     let colorSeleccionado = producto.colores[0] || "Único";
     let cantidadSeleccionada = 1;
 
+    // A1 Comment: AI Try-On state variables
+    let vtoActive = false;
+    let vtoUserImage = null;
+
     function renderizarDetalleHTML() {
       const sinStock = producto.stock === 0;
 
       container.innerHTML = `
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-8 shadow-sm">
         
-        <!-- Columna 1: Imagen -->
-        <div class="relative overflow-hidden rounded-2xl aspect-square bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">
-          <img src="${producto.imagen}" alt="${producto.nombre}" class="w-full h-full object-cover" />
-          ${producto.stock <= 3 && producto.stock > 0 
-            ? `<span class="absolute top-4 left-4 rounded-full bg-amber-600 px-3.5 py-1 text-[10px] font-black uppercase text-white tracking-wider">¡Pocas unidades!</span>`
-            : sinStock 
-              ? `<span class="absolute top-4 left-4 rounded-full bg-zinc-700 px-3.5 py-1 text-[10px] font-black uppercase text-white tracking-wider">Agotado</span>`
-              : ""
-          }
+        <!-- A1 Comment: Columna 1: Imagen y Probador Virtual -->
+        <div class="flex flex-col gap-6">
+          <div class="relative overflow-hidden rounded-2xl aspect-square bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">
+            <img src="${producto.imagen}" alt="${producto.nombre}" class="w-full h-full object-cover" />
+            ${producto.stock <= 3 && producto.stock > 0 
+              ? `<span class="absolute top-4 left-4 rounded-full bg-amber-600 px-3.5 py-1 text-[10px] font-black uppercase text-white tracking-wider">¡Pocas unidades!</span>`
+              : sinStock 
+                ? `<span class="absolute top-4 left-4 rounded-full bg-zinc-700 px-3.5 py-1 text-[10px] font-black uppercase text-white tracking-wider">Agotado</span>`
+                : ""
+            }
+          </div>
+          
+          <!-- A1 Comment: Try-On UI Panel -->
+          <div class="bg-zinc-50 dark:bg-zinc-950 border border-zinc-250 dark:border-zinc-800 rounded-2xl p-5 shadow-inner">
+            <div class="flex items-center justify-between mb-3.5">
+              <div class="flex items-center gap-1.5">
+                <span class="text-xs font-black uppercase tracking-widest text-sport-500 font-display">Probador Virtual IA</span>
+                <span class="bg-sport-100 dark:bg-sport-950/40 text-[9px] font-black uppercase tracking-wider text-sport-600 dark:text-sport-400 px-2 py-0.5 rounded-full">AI Live</span>
+              </div>
+              <span class="text-[10px] text-zinc-400 font-medium">Try-On</span>
+            </div>
+            
+            <p class="text-xs text-slate-500 dark:text-stone-400 mb-4 leading-relaxed font-sans">Sube tu foto para ver cómo te queda esta prenda en tiempo real usando IA generativa.</p>
+            
+            <!-- A1 Comment: Upload button -->
+            <div id="vto-dropzone" class="border border-dashed border-zinc-300 dark:border-zinc-800 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer transition-colors bg-white dark:bg-zinc-900 hover:border-sport-500 text-center ${vtoActive ? 'hidden' : ''}">
+              <svg class="w-7 h-7 text-zinc-400 mb-1.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316A2.192 2.192 0 0 0 14.502 4h-5c-.75 0-1.437.377-1.837 1.004l-.838 1.371Z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.25a3 3 0 1 0 6 0 3 3 0 0 0-6 0Z"></path>
+              </svg>
+              <span class="text-[10px] font-bold text-slate-700 dark:text-stone-300 uppercase tracking-wider">Subir Foto</span>
+              <input type="file" id="vto-file-input" class="hidden" accept="image/*">
+            </div>
+
+            <!-- A1 Comment: Live simulator canvas -->
+            <div id="vto-sim-area" class="mt-4 ${vtoActive ? '' : 'hidden'}">
+              <div class="relative w-full aspect-square bg-zinc-950 rounded-xl overflow-hidden border border-zinc-800 flex items-center justify-center">
+                <canvas id="vto-canvas" class="w-full h-full object-contain"></canvas>
+                <div id="vto-laser" class="absolute left-0 right-0 h-0.5 bg-green-500 shadow-md shadow-green-500/80 hidden"></div>
+                <div id="vto-loader" class="absolute inset-0 bg-zinc-950/70 backdrop-blur-xs flex flex-col items-center justify-center gap-3 hidden">
+                  <div class="h-8 w-8 animate-spin rounded-full border-3 border-zinc-700 border-t-green-500"></div>
+                  <p class="text-[10px] font-mono text-zinc-300" id="vto-loader-text">AI loading...</p>
+                </div>
+              </div>
+              <button id="vto-reset-btn" class="w-full mt-3 rounded-lg border border-zinc-300 dark:border-zinc-800 text-[10px] font-black uppercase text-slate-700 dark:text-stone-300 py-2.5 transition-colors hover:border-red-500 hover:text-red-500 cursor-pointer">Reiniciar Probador</button>
+            </div>
+          </div>
         </div>
 
         <!-- Columna 2: Ficha Técnica -->
@@ -195,6 +237,170 @@ export async function setupDetalle(params) {
           renderizarDetalleHTML();
         }, 1500);
       });
+
+      // A1 Comment: Start Try-on events
+      initVTOEvents();
+    }
+
+    // A1 Comment: Setup uploader and canvas events
+    function initVTOEvents() {
+      const dropzone = document.getElementById("vto-dropzone");
+      const fileInput = document.getElementById("vto-file-input");
+      const resetBtn = document.getElementById("vto-reset-btn");
+
+      if (!document.getElementById("vto-scan-style")) {
+        const style = document.createElement("style");
+        style.id = "vto-scan-style";
+        style.innerHTML = `
+          @keyframes vtoLaser {
+            0% { top: 0%; }
+            50% { top: 100%; }
+            100% { top: 0%; }
+          }
+          .vto-laser-line {
+            animation: vtoLaser 2.2s ease-in-out infinite;
+          }
+        `;
+        document.head.appendChild(style);
+      }
+
+      dropzone?.addEventListener("click", () => fileInput?.click());
+
+      // A1 Comment: Drag and drop handlers
+      dropzone?.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropzone.classList.add("border-sport-500", "bg-sport-950/10");
+      });
+      dropzone?.addEventListener("dragleave", () => {
+        dropzone.classList.remove("border-sport-500", "bg-sport-950/10");
+      });
+      dropzone?.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropzone.classList.remove("border-sport-500", "bg-sport-950/10");
+        if (e.dataTransfer?.files?.length) {
+          handleVTOImage(e.dataTransfer.files[0]);
+        }
+      });
+
+      fileInput?.addEventListener("change", (e) => {
+        const target = e.target;
+        if (target.files?.length) {
+          handleVTOImage(target.files[0]);
+        }
+      });
+
+      resetBtn?.addEventListener("click", () => {
+        vtoActive = false;
+        vtoUserImage = null;
+        renderizarDetalleHTML();
+      });
+
+      // A1 Comment: Redraw if active
+      if (vtoActive && vtoUserImage) {
+        drawVTOSimulation(vtoUserImage);
+      }
+    }
+
+    // A1 Comment: Load file and run scanner
+    function handleVTOImage(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imgData = e.target?.result;
+        const img = new Image();
+        img.onload = () => {
+          vtoActive = true;
+          vtoUserImage = img;
+          
+          const simArea = document.getElementById("vto-sim-area");
+          const dropzone = document.getElementById("vto-dropzone");
+          if (simArea) simArea.classList.remove("hidden");
+          if (dropzone) dropzone.classList.add("hidden");
+
+          const laser = document.getElementById("vto-laser");
+          const loader = document.getElementById("vto-loader");
+          const loaderText = document.getElementById("vto-loader-text");
+
+          if (laser) {
+            laser.classList.remove("hidden");
+            laser.classList.add("vto-laser-line");
+          }
+          if (loader) loader.classList.remove("hidden");
+
+          let step = 0;
+          const steps = [
+            "[AI] Analizando cuerpo...",
+            "[AI] Escaneando silueta...",
+            "[AI] Adaptando prenda...",
+            "[AI] Renderizando iluminación..."
+          ];
+
+          // A1 Comment: Write fit progress
+          const timer = setInterval(() => {
+            if (step < steps.length) {
+              if (loaderText) loaderText.textContent = steps[step];
+              step++;
+            } else {
+              clearInterval(timer);
+              if (laser) {
+                laser.classList.add("hidden");
+                laser.classList.remove("vto-laser-line");
+              }
+              if (loader) loader.classList.add("hidden");
+              drawVTOSimulation(img);
+            }
+          }, 650);
+        };
+        if (imgData) img.src = imgData;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // A1 Comment: Overlay garment onto user photo
+    function drawVTOSimulation(userImg) {
+      const canvas = document.getElementById("vto-canvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(userImg, 0, 0, canvas.width, canvas.height);
+
+      // A1 Comment: Draw shop clothing on top
+      const prodImg = new Image();
+      prodImg.onload = () => {
+        ctx.shadowColor = "#e05c1a";
+        ctx.shadowBlur = 18;
+
+        let px = canvas.width * 0.25;
+        let py = canvas.height * 0.22;
+        let pw = canvas.width * 0.5;
+        let ph = canvas.height * 0.5;
+
+        if (producto.categoria === "Calzado") {
+          py = canvas.height * 0.58;
+          ph = canvas.height * 0.32;
+        } else if (producto.categoria === "Balones") {
+          px = canvas.width * 0.35;
+          py = canvas.height * 0.45;
+          pw = canvas.width * 0.3;
+          ph = canvas.height * 0.3;
+        }
+
+        ctx.drawImage(prodImg, px, py, pw, ph);
+        ctx.shadowBlur = 0;
+
+        ctx.fillStyle = "rgba(16, 185, 129, 0.95)";
+        ctx.font = "bold 9px monospace";
+        ctx.fillText("✓ AI FIT ACTIVE", 12, 18);
+
+        ctx.strokeStyle = "rgba(16, 185, 129, 0.4)";
+        ctx.lineWidth = 1.2;
+        ctx.strokeRect(px - 3, py - 3, pw + 6, ph + 6);
+      };
+      prodImg.src = producto.imagen;
     }
 
     renderizarDetalleHTML();
