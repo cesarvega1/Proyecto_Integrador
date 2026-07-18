@@ -5,7 +5,7 @@ const { open } = require('sqlite');
 const path = require('path');
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const DB_SQLITE_PATH = path.join(__dirname, 'database', 'database.sqlite');
 
 // Middleware
