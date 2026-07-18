@@ -1,5 +1,6 @@
-export const BASE_URL = import.meta.env.VITE_API_URL;
+export const BASE_URL = "https://sportzone-api-7y78.onrender.com";
 
+console.log("BASE_URL:", BASE_URL);
 export async function handleResponse(response) {
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
