@@ -92,3 +92,45 @@ Let's trace what happens when you enter the main page and open the Catalog:
 * **Local Storage:** We use `sessionStorage` and `localStorage` in the frontend to remember the shopping cart or if the user logged in, even if they close the tab.
 * **Responsive Design:** You will see in Tailwind CSS that we use prefixes like `md:` or `lg:` to make the store look good on phones and big screens.
 * **Dynamic SQL Queries:** You will see how in the Backend, data (like arrays) must be saved as plain text (`JSON.stringify()`) and then recovered and converted back to an array (`JSON.parse()`) in SQLite.
+
+---
+
+## 4. Artificial Intelligence (AI Features)
+
+As part of the integration phase of the project, we implemented three AI-powered features to improve the shopping experience.
+
+### Voice Shopping Assistant
+The user can speak to search for products. The browser captures the audio using the **Web Speech API**, converts it to text, and then the frontend filters the product catalog based on what the user said. This allows hands-free navigation of the store.
+
+### Intelligent Visual Search
+The user can upload or take a photo of a product. The image is analyzed using the **Google Gemini Vision API**, which identifies the type of product, color, and style. The result is then used to search and suggest matching products from the catalog.
+
+### Virtual Try-On
+The user can see how a selected clothing item would look on them. This feature uses AI to overlay the product onto a reference image or camera input, giving the client a better idea of the product before buying.
+
+> **Note:** These features require API keys for external AI services. Make sure to configure the environment variables before running the project.
+
+---
+
+## 5. Deployment (Cloud)
+
+The project is fully deployed in the cloud. This means it is not running only on a local machine — it is accessible from any device with an internet connection.
+
+### What is Deployment?
+Deployment is the process of uploading your application to a remote server so other people can use it without needing to install or run anything on their own computer.
+
+### Frontend — Vercel
+The frontend (the `/client` folder) is deployed on **Vercel**. Vercel is a cloud platform specialized in hosting frontend applications. Every time new code is pushed to the repository, Vercel automatically rebuilds and redeploys the site.
+
+* **Platform:** [vercel.com](https://vercel.com)
+* **What it hosts:** The HTML, CSS, and JavaScript files built by Vite.
+* **How it works:** Vercel runs `npm run build`, takes the output from the `/dist` folder, and serves it globally.
+
+### Backend — Render
+The backend (the `/backend` folder) is deployed on **Render**. Render is a cloud platform for hosting servers and APIs. It keeps the Node.js + Express server running continuously in the cloud.
+
+* **Platform:** [render.com](https://render.com)
+* **What it hosts:** The REST API built with Node.js and Express.
+* **How it works:** Render runs `node index.js` on a remote server. The frontend communicates with this server through HTTP requests.
+
+> **Important:** When the project is deployed, the frontend no longer uses `http://localhost:3001` to reach the backend. It uses the public URL provided by Render (for example, `https://sportzone-api.onrender.com`).
