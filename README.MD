@@ -123,6 +123,7 @@ Deployment is the process of uploading your application to a remote server so ot
 The frontend (the `/client` folder) is deployed on **Vercel**. Vercel is a cloud platform specialized in hosting frontend applications. Every time new code is pushed to the repository, Vercel automatically rebuilds and redeploys the site.
 
 * **Platform:** [vercel.com](https://vercel.com)
+* **🔗 Live URL:** [https://proyecto-integrador-kappa-ashy.vercel.app](https://proyecto-integrador-kappa-ashy.vercel.app)
 * **What it hosts:** The HTML, CSS, and JavaScript files built by Vite.
 * **How it works:** Vercel runs `npm run build`, takes the output from the `/dist` folder, and serves it globally.
 
